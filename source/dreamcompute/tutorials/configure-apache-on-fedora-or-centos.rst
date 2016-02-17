@@ -46,8 +46,8 @@ with:
 
 If you visit the floating IP in your browser for your DreamCompute
 instance, you are able to see the 'getting started' page.  You can
-find this IP on the `Instances`_ (IP Address column) or
-`Access & Security`_ (floating ips tab) panel pages.
+find this IP on the Instances (IP Address column) or
+Access & Security (floating ips tab) panel pages.
 
 *The default page displays the following when Apache successfully
 installs:*
@@ -172,9 +172,6 @@ the command:
 .. code::
 
     service httpd reload
-
-.. _Instances: https://dashboard.dreamcompute.com/project/instances/
-.. _Access & Security: https://dashboard.dreamcompute.com/project/access_and_security/
 
 .. meta::
     :labels: apache fedora centos linux

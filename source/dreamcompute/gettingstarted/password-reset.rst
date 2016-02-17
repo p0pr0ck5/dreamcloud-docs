@@ -18,9 +18,9 @@ It's easy to reset your DreamCompute password in the DreamHost Control Panel.
 DreamCompute Dashboard
 ~~~~~~~~~~~~~~~~~~~~~~
 
-You can change your password using the DreamCompute dashboard. Go to the
-`Change Password <https://dashboard.dreamcompute.com/settings/password/>`_
-page, enter your current password and your new password.
+You can change your password using the DreamCompute dashboard. Go to Settings
+-> Change Password, in the DreamCompute Dashboard, enter your current password
+and your new password.
 
 .. figure:: images/DHC-change-password.png
 

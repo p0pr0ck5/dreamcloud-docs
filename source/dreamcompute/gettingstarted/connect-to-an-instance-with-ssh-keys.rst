@@ -9,8 +9,7 @@ wish to use on the "Access & Security" tab of the
 instance creation screen.  For ssh to work it is
 required that port 22 is open in your selected
 security group in the DreamCompute
-`Access & Security - Security Group <https://dashboard.dreamcompute.com/project/access_and_security/?tab=access_security_tabs__security_groups_tab>`_
-dashboard.
+Access & Security - Security Group dashboard.
 
 Using Windows
 -------------

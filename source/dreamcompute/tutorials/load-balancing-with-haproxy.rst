@@ -22,8 +22,8 @@ Prepping Your Virtual Machine
 
 Create a virtual machine in DreamCompute using your favorite method, a
 *subsonic* flavor should be enough. Make sure to assign an SSH key and
-allow access to  HTTP (port 80) and SSH (port 22) in the `Access &
-Security`_ group.Associate a public IPv4 "floating" IP address to this
+allow access to  HTTP (port 80) and SSH (port 22) in the Access &
+Security group. Associate a public IPv4 "floating" IP address to this
 machine.
 
 .. figure:: images/HAProxy_instances_dash.fw.png
@@ -172,8 +172,6 @@ Next, you'll need to activate HAProxy by setting ENABLED to 1 in
 Assuming that you have configured your DNS to point app1.domain.io and
 app2.domain.io to your floating IP address, you should be able to
 access your applications via HAProxy. Congratulations!
-
-.. _Access & Security: https://dashboard.dreamcompute.com/project/access_and_security/
 
 .. meta::
     :labels: apache haproxy debian ubuntu

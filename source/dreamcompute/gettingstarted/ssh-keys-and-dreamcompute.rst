@@ -8,7 +8,7 @@ simplifies managing users for OpenStack (the public key is injected
 into the instance at boot). This prevents needing to modify files or
 passwords on the operating system on startup.
 
-SSH keypairs are managed on the `Access & Security - Keypairs`_
+SSH keypairs are managed on the Access & Security -> Keypairs
 section of the dashboard.
 
 SSH Key Components
@@ -42,10 +42,9 @@ via the DreamCompute dashboard
 ------------------------------
 
 The easiest way to generate a key is to have DreamCompute generate one
-for you.  You can do this by going to the DreamCompute `Access &
-Security - Keypairs <https://dashboard.dreamcompute.com/project/access_and_security/?tab=access_security_tabs__keypairs_tab>`_
-dashboard.  On the top right, click the "Create Keypair" button, give
-the key a name, and click "Create Keypair".  Your browser will start
+for you.  You can do this by going to the DreamCompute dashboard, Access &
+Security -> Keypairs.  On the top right, click the "Create Keypair" button,
+give the key a name, and click "Create Keypair".  Your browser will start
 downloading the private key named the same as they name given with a
 .pem file extension.  Save this file for later user as your id_rsa
 private key file.
@@ -136,12 +135,10 @@ Import an Existing SSH key into the Dashboard
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Find the public key file, and open it to copy its contents.  Next, go
-to the DreamCompute `Access & Security - Keypairs`_ dashboard and
+to the DreamCompute dashboard, go to Access & Security -> Keypairs, and
 click on "Import Keypair".  Give it a name and paste in the contents
 of your public key, then click "Import Keypair" to save it.
 
-
-.. _Access & Security - Keypairs: https://dashboard.dreamcompute.com/project/access_and_security/?tab=access_security_tabs__keypairs_tab
 
 .. meta::
     :labels: ssh key mac linux windows
