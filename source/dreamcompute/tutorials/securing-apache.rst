@@ -9,8 +9,8 @@ proxying requests as a reverse proxy gateway. Given its popularity and easy of
 use, it's essential to install and maintain a secure environment for Apache
 installations.
 
-Keep Updated
-~~~~~~~~~~~~
+Keep Apache Updated
+~~~~~~~~~~~~~~~~~~~
 
 Apache has a good security track record, and security bugs are seldom found
 within the web server itself. Still, it's important to keep Apache updated in
@@ -26,8 +26,8 @@ Securing Configurations
 
 Computers are only as smart as the people using them. Apache is built to be
 stable and secure, but it will only be a secure as the user who configures it. 
-Once Apache is built and installed, configure the server to be as minimal as
-possible is important.
+Once Apache is built and installed, it's important to configure the server to be
+as minimal as possible.
 
 Run as an Unprivileged User
 ---------------------------
@@ -46,8 +46,9 @@ done via the `User` and `Group`  directives in the Apache configuration file:
 	Group apache;
 
 Apache servers distributed as a common OS package may also use a user and group
-name such as `www-data` or `nobody`. Regardless of the name, it is key that this
-user/group selection has a few rights as necessary to properly run.
+name such as `www-data` or `nobody`. Regardless of the choice of user's name,
+make sure that the user/group selection has as few rights as necessary to run
+properly.
 
 Disable Server Tokens
 ---------------------
@@ -56,8 +57,7 @@ The HTTP spec recommends (but not requires) that web servers identify themselves
 via the `Server` header. Historically, web servers have included their version
 information as part of this header. Disclosing the version of Apache running can
 be undesirable, particularly in environments sensitive to information
-disclosure. Apache can be configured to not display its version in the `Server`
-header:
+disclosure. Configure Apache not to display its version in `Server` header:
 
 .. code::
 
@@ -113,14 +113,14 @@ Restrict Access by Password
 ---------------------------
 
 Access to certain locations can also be set via password-based credentials,
-using the `htpasswd` utility. First, a `.htpasswd` file must be created that
-will store the desired user/password combinations:
+using the `htpasswd` utility. First, create a file called  `.htpasswd` to store
+the desired user/password combinations:
 
 .. code::
 
 	# htpasswd -c /path/to/.htpasswd user1
 
-The `htpasswd` command will create the file `/path/to/.htpasswd` if it doesn't
+The `htpasswd` command creates the file `/path/to/.htpasswd` if it doesn't
 exist, and prompt for a password. To add another user, simply run the command,
 leaving out the `-c` argument:
 
@@ -128,7 +128,7 @@ leaving out the `-c` argument:
 
 	# htpasswd /path/to/.htpasswd user2
 
-Once this is done, Apache must be configured to read the password file and
+Once you've created the user, configure Apache to read the password file and
 control access to the desired directory:
 
 .. code::
@@ -173,7 +173,7 @@ but will allow the request to continue as long as the client sends more than
 quality (such as remote clients with high latency, or those on low-grade
 cellular or satellite networks) to send requests, while still protecting against
 known fingerprints of the Slowloris attack. `RequestReadTimeout` configurations
-can be complex; more inforation about this directive can be found at the module
+can be complex; more information about this directive can be found at the module
 `documentation page <https://httpd.apache.org/docs/2.4/mod/mod_reqtimeout.html>`_.
 
 Lower the Request Timeout Threshold
@@ -200,16 +200,15 @@ protocols, instead of legacy SSL. Both versions of SSL widely available today
 (SSLv2 and SSLv3) have severe security flaws, and should never be used in
 productions environments. Historically, the configurations associated with
 SSL/TLS configuration in Apache are prefixed with `SSL`; to promote the use of
-modern security protocols, we will use the term 'TLS' when referencing encrypted
-(HTTPS) traffic, and 'ssl' when applicable to specific Apache configuration
-directives.
+modern security protocols, in this tutorial the term 'TLS' is used when
+referencing encrypted (HTTPS) traffic, and 'ssl' when applicable to specific
+Apache configuration directives.
 
 Turn TLS On
 -----------
 
-It goes without saying, but in order to serve encrypted traffic, SSL/TLS needs
-to be enabled for your server. Fortunately, encrypted connections can be
-enabled/disabled on a per-server basis in Apache:
+In order to serve encrypted traffic, SSL/TLS needs to be enabled in Apache.
+Enable secure communications with the `SSLEngine` directive:
 
 .. code::
 
@@ -224,7 +223,7 @@ Enable Strong TLS Ciphers
 
 By default, Apache allows for a wide variety of cryptographic ciphers to be used
 in TLS connections. Some of these ciphers are legacy offerings that are weak or
-prone to attack, and shouldn't be used. We recommend using the Modern or
+prone to attack, and shouldn't be used. Dreamhost recommends using the Modern or
 Intermediate cipher suites outlined by Mozilla (the modern list of ciphers is
 stronger, but will cause connectivity problems for older platforms like Internet
 Explorer or Windows XP). Additionally, it's recommended that the server prefer
@@ -241,8 +240,8 @@ Enable TLS Session Caching
 
 Opening a new TLS connection to a server is very expensive as a result of the
 cryptographic protocols involved. To maintain a high-performance environment,
-it's recommended to cache existing TLS connections so that each new request from
-a client/browser does not need to perform the full TLS handshake:
+cache existing TLS connections so that each new request from a client/browser
+does not need to perform the full TLS handshake:
 
 .. code::
 
@@ -263,7 +262,7 @@ unique set of Diffie-Hellman parameters and configuring Apache to use this value
 	# build a 2048-bit DH prime
 	$ openssl dhparam 2048 > /path/to/dhparam
 
-From here, the params are added to the end of the file noted in the
+From here, add the params to the end of the file noted in the
 `SSLCertificateFile` directive:
 
 .. code::
@@ -275,15 +274,15 @@ For more information on the Logjam attack, see https://weakdh.org/
 Force All Connections over TLS
 ------------------------------
 
-Encrypted communications are only useful when actually in use. If desirable, it
-is possible to tell browsers to only use TLS connections for your site. This
-is accomplished with the `Strict-Transport-Security` header:
+Encrypted communications are only useful when actually in use. Apache can tell
+browsers to only use TLS connections for your site. This is accomplished with
+the `Strict-Transport-Security` header:
 
 .. code::
 
 	Header always set Strict-Transport-Security max-age=15768000;
 
-Apache can also be configured to send a 301 redirect for all plaintext HTTP
+For all plaintext connections, configure Apache to send a 301 redirect for
 requests to the TLS version of the site:
 
 .. code::
@@ -299,7 +298,7 @@ Additional Security Measures
 
 Beyond the basics of installing a secure Apache binary, locking down access to
 sensitive areas of your site, and properly serving TLS connections, there are
-some additional steps that can be taken for the extra security-conscious user.
+some additional steps that the extra security-conscious user can take:
 
 Install a WAF
 -------------
