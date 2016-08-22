@@ -176,18 +176,6 @@ known fingerprints of the Slowloris attack. `RequestReadTimeout` configurations
 can be complex; more information about this directive can be found at the module
 `documentation page <https://httpd.apache.org/docs/2.4/mod/mod_reqtimeout.html>`_.
 
-Lower the Request Timeout Threshold
-------------------------------------
-
-Lowering the timeout threshold will allow Apache to close connections faster
-when it senses that no data has been sent from the client. By default, this
-threshold is sent to 60 seconds; it's recommended to lower this as much as
-possible without negatively impacting traffic:
-
-.. code::
-
-	TimeOut 10
-
 Securing SSL/TLS
 ~~~~~~~~~~~~~~~~
 
