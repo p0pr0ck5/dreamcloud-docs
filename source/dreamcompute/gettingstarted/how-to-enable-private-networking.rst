@@ -30,7 +30,7 @@ Private networking in US-EAST 2 costs $5 per private network.
 Private network options
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Once support as confirmed the network quota has been adjusted, the private
+Once support has confirmed the network quota has been adjusted, the private
 network can be added.  Please review the below options to determine settings
 for the private network.
 
@@ -47,7 +47,7 @@ DHCP
 ----
 
 When a subnet is defined, DHCP can be set enabled or disabled, and can be
-changed later if desired.  When DHCP is enable, newly created instances will
+changed later if desired.  When DHCP is enabled, newly created instances will
 run cloud-init at start and detect it, and therefore determine it isn't
 necessary to hard-code network settings into the operating system.  If it is
 disabled, then these settings will be hard-coded.  Having DHCP enabled can help
@@ -141,9 +141,9 @@ DreamCompute dashboard
         In the "Subnet" drop-down, select the private network created in
         steps #1-4 above.  Finally, click the "Add Interface" button.
 
-This completes the process of adding a private network to the account.  To
-select the private network and add a floating IP address, the additional steps
-are below.
+This completes the process of adding a private network to the account. To
+select the private network and add a floating IP address, follow the additional
+steps below.
 
 1. Begin adding an instance:
 
@@ -213,7 +213,7 @@ specified.
 
         $ neutron router-create private-router
 
-This command creates a new router with default configuration.  In this
+This command creates a new router with a default configuration.  In this
 example the name "private-router" is given.
 
 4. Create a router interface:
@@ -233,11 +233,11 @@ This command adds an interface to the router to the private network.
 This command sets the router gateway to the public network, to allow
 it access to the internet.
 
-This completes the process of adding a private network to the account.  To
-select the private network and add a floating IP address, some example commands
-are below.
+This completes the process of adding a private network to the account. The
+example commands below show how to select the private network and add a floating
+IP address.
 
-1. Determine flavor, security group, image, keypair and network ID:
+1. Determine flavor, security group, image, keypair, and network ID:
 
     .. code:: console
 
@@ -248,7 +248,7 @@ are below.
         $ neutron net-list
 
 The above commands will output the available flavors, security groups,
-images, keypairs and the networks available.  Select the necessary
+images, keypairs, and the networks available.  Select the necessary
 options for creating the instance.  For the network, the long ID is
 needed in place of the given name.
 
