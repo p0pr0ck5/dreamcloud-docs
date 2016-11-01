@@ -66,7 +66,7 @@ titles and H1 are surrounded by =, H2 underlined by ~, H3 underlined by -, H4
 underlined by ^, H5 underlined by \*, and H6 underlined by " as shown in the
 following examples:
 
-.. code::
+.. code-block:: rst
 
     =================
     Title or Header 1
@@ -114,7 +114,7 @@ Tables
 RST allows for several different ways of creating tables. The easiest way is
 described in the following example, although it is not extremely flexible:
 
-.. code::
+.. code-block:: rst
 
     ======== ========
     Column 1 Column 2
@@ -134,7 +134,7 @@ Column 1 Column 2
 
 The second way is harder to manage, but more flexible:
 
-.. code::
+.. code-block:: rst
 
     +----------+----------+----------+
     | Column 1 | Column 2 | Column 3 |
@@ -158,7 +158,7 @@ which ends up looking like:
 The final way is the easiest to manage but hardest to visualize before built to
 HTML:
 
-.. code::
+.. code-block:: rst
 
     .. csv-table:: Table Title
        :header: "Column 1", "Column 2"
@@ -182,24 +182,48 @@ Code blocks
 It is common to include code examples in tutorials. DreamHost Cloud docs are
 built with sphinx, which allows you to include code by using the following:
 
-.. code::
+.. code-block:: rst
 
-    .. code::
+    .. code-block:: language
 
         code goes here
 
-which looks like:
+Replace "language" with the language that you are demonstrating, for example a
+command on the console would use "console" as the language, and a bash script
+would use "bash".
 
-.. code::
+Which looks like:
+
+.. code-block::
 
     code goes here
+
+Shell commands
+^^^^^^^^^^^^^^
+
+When giving examples of shell commands, use the code-block directive with
+"console" as the language. Before the command add a PS1, depending on what user
+and where the command should be run. for example:
+
+.. code-block:: console
+
+    [user@localhost]$ ansible-playbook site.yml
+
+Shows to run ``ansible-playbook site.yml`` as a normal user on the local
+machine.
+
+.. code-block:: console
+
+    [root@server]# apt install apache2
+
+Shows to run ``apt install apache2`` as the root user on the server.
 
 Lists
 -----
 
 Ordered lists should be done like the following:
 
-.. code::
+.. code-block:: rst
 
     #. Item 1
 
@@ -215,7 +239,7 @@ Ordered lists should be done like the following:
 
 and unordered lists should be done with "*", such as:
 
-.. code::
+.. code-block:: rst
 
     * List Item
 
@@ -230,7 +254,7 @@ Images are useful, but not required in DreamHost Cloud documentation. If you
 want to have an image in an article, put the image in the ./images directory
 relative to the article and reference it from there, using the following:
 
-.. code::
+.. code-block:: rst
 
     .. figure:: images/image.png
 
@@ -253,7 +277,7 @@ Links
 
 In most cases, use the following for links:
 
-.. code::
+.. code-block:: rst
 
     `text to be clickable <https://example.com>`__
 
@@ -263,7 +287,7 @@ same text to a different target. If there is one underscore, it then
 creates a link and saves the text as a reference, so the next time you use it
 you don't have to add the target, just the text, as in the following example:
 
-.. code::
+.. code-block:: rst
 
     `text to be clickable`_
 
