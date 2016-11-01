@@ -23,11 +23,11 @@ too much which distribution of Linux you're running, but make sure
 you have the ``git`` package installed so that you can clone the
 letsencrypt repository, like so:
 
-.. code:: bash
+.. code-block:: console
 
-    sudo -s
-    cd /opt
-    git clone git://github.com/letsencrypt/letsencrypt
+    [user@server]$ sudo -s
+    [root@server]# cd /opt
+    [root@server]# git clone git://github.com/letsencrypt/letsencrypt
 
 Get your first certificate
 --------------------------
@@ -53,10 +53,10 @@ domain's document root!
 If you're using Apache on a Debian or Ubuntu instance, you can
 use the Apache plugin for ``letsencrypt-auto`` like so:
 
-.. code:: bash
+.. code-block:: console
 
-    cd /opt/letsencrypt
-    ./letsencrypt-auto --apache -d example.com
+    [root@server]# cd /opt/letsencrypt
+    [root@server]# ./letsencrypt-auto --apache -d example.com
 
 This will prompt you for some information including
 your email address. Fill it in with valid information and you
@@ -72,10 +72,10 @@ If you just realized that you also need a certificate for a subdomain,
 don't worry! You can add a new subdomain to your existing cert at any
 time, by simply calling ``letsencrypt-auto`` again like so...
 
-.. code:: bash
+.. code-block:: console
 
-    cd /opt/letsencrypt
-    ./letsencrypt-auto --apache -d example.com -d sub.example.com
+    [root@server]# cd /opt/letsencrypt
+    [root@server]# ./letsencrypt-auto --apache -d example.com -d sub.example.com
 
 Automatic renewal
 -----------------
@@ -85,7 +85,7 @@ certificates): You can have your system automatically renew all of the
 certificates for you. I wrote a small shell script I called
 ``/usr/local/bin/update_certs`` which looks like this:
 
-.. code:: bash
+.. code-block:: bash
 
     #!/bin/bash
 

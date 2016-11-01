@@ -110,18 +110,18 @@ Running the Ansible Playbook
 
 The Ansible playbook can be run with the following command:
 
-.. code::
+.. code-block:: console
 
-    $ ansible-playbook postgresql-server.yaml
+    [user@localhost]$ ansible-playbook postgresql-server.yaml
 
 You'll soon see on `DreamHost Cloud web UI
 <https://iad2.dreamcompute.com/project/instances/>`_ the new instance
 and the new volume. Login into the new machine and check that the
 database is really there:
 
-.. code::
+.. code-block:: console
 
-    ubuntu@postgres01:~$ psql -h localhost -d mydb -U dreamer
+    [user@server]$ psql -h localhost -d mydb -U dreamer
     Password for user dreamer:
     psql (9.5.3)
     SSL connection (protocol: TLSv1.2, cipher:

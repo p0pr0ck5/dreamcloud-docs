@@ -91,18 +91,18 @@ instance ephemeral, since we won't be planning to keep it.
 
 2.  Install the needed software to work with glance on this new instance.
 
-.. code:: bash
+.. code-block:: console
 
-    apt-get install python-dev python-pip
-    pip install python-openstackclient
-    pip install python-glanceclient
+    [root@server]# apt-get install python-dev python-pip
+    [root@server]# pip install python-openstackclient
+    [root@server]# pip install python-glanceclient
 
 After this, run "glance help" and check for any other modules that it says are
 missing.  Install them with:
 
-.. code:: bash
+.. code-block:: console
 
-    pip install MODULENAME
+    [root@server]# pip install MODULENAME
 
 3.  Setup your OpenStack RC file for the DESTINATION cluster on this new
 instance, which can be downloaded from its Access & Security -> API Access menu
@@ -110,11 +110,11 @@ in the dashboard.  Either upload the file to your instance, or copy/paste its
 contents into a file on this instance.  Once you are run, you can run it like
 so.
 
-.. code:: bash
+.. code-block:: console
 
-    vi dreamcompute-CLUSTER.sh
+    [root@server]# vi dreamcompute-CLUSTER.sh
     <paste the contents, save>
-    . dreamcompute-CLUSTER.sh
+    [root@server]# . dreamcompute-CLUSTER.sh
 
 It will then prompt you to "Please enter your OpenStack Password:", and go
 ahead and do that.
@@ -122,9 +122,9 @@ ahead and do that.
 If you run a command like the below, it should output the current OS images
 in the destination cluster.
 
-.. code:: bash
+.. code-block:: console
 
-    glance image-list
+    [root@server]# glance image-list
 
 4.  Delete the instance that you wish to move, freeing up its volume to be
 attached to the above newly created instance.
@@ -135,10 +135,10 @@ drop-down on the right side, and then "Edit Attachments".
 6.  On the new instance, check "dmesg" for the drive letter, or you can check
 the usual names for it, until you find the volume.
 
-.. code:: bash
+.. code-block:: console
 
-    fdisk -l /dev/vdb | grep Disk
-    fdisk -l /dev/vdc | grep Disk
+    [root@server]# fdisk -l /dev/vdb | grep Disk
+    [root@server]# fdisk -l /dev/vdc | grep Disk
 
 One of those should match the size of the volume you are trying to move.  Make
 note of the drive letter (the /dev/vdX part).
@@ -147,11 +147,11 @@ note of the drive letter (the /dev/vdX part).
 Don't forget to change the drive letter in the example to the one you found
 above, and change any text in all CAPS to suit your taste.
 
-.. code:: bash
+.. code-block:: console
 
-    dd if=/dev/vdX | glance --os-image-api-version 1 image-create \
-        --name "INSTANCENAME" --is-public false --disk-format raw \
-        --container-format bare
+    [root@server]# dd if=/dev/vdX | glance --os-image-api-version 2 \
+        image-create \ --name "INSTANCENAME" --is-public false --disk-format \
+        raw --container-format bare
 
 8.  Wait while this runs, and if successful it should output the info about the
 new image that was created.
@@ -171,18 +171,18 @@ servers, etc, leaving hopefully just default system tools and sshd running.
 
 2.  Install the needed software to work with glance on this new instance.
 
-.. code:: bash
+.. code-block:: console
 
-    apt-get install python-dev python-pip
-    pip install python-openstackclient
-    pip install python-glanceclient
+    [root@server]# apt-get install python-dev python-pip
+    [root@server]# pip install python-openstackclient
+    [root@server]# pip install python-glanceclient
 
 After this, run "glance help" and check for any other modules that it says are
 missing.  Install them with:
 
-.. code:: bash
+.. code-block:: console
 
-    pip install MODULENAME
+    [root@server]# pip install MODULENAME
 
 3.  Setup your OpenStack RC file for the DESTINATION cluster on this new
 instance, which can be downloaded from its Access & Security -> API Access menu
@@ -190,11 +190,11 @@ in the dashboard.  Either upload the file to your instance, or copy/paste its
 contents into a file on this instance.  Once you are run, you can run it like
 so.
 
-.. code:: bash
+.. code-block:: console
 
-    vi dreamcompute-CLUSTER.sh
+    [root@server]# vi dreamcompute-CLUSTER.sh
     <paste the contents, save>
-    . dreamcompute-CLUSTER.sh
+    [root@server]# . dreamcompute-CLUSTER.sh
 
 It will then prompt you to "Please enter your OpenStack Password:", and go
 ahead and do that.
@@ -202,9 +202,9 @@ ahead and do that.
 If you run a command like the below, it should output the current OS images
 in the destination cluster.
 
-.. code:: bash
+.. code-block:: console
 
-    glance image-list
+    [root@server]# glance image-list
 
 4.  Determine the drive letter by examining the output of "df -h" for the root
 (/) filesystem.  Generally this will be /dev/vda1.
@@ -212,9 +212,9 @@ in the destination cluster.
 5.  Now we will copy the data to glance, using dd and piping it directly.
 Change any text in all CAPS to suit your taste.
 
-.. code:: bash
+.. code-block:: console
 
-    dd if=/dev/vda | glance --os-image-api-version 1 image-create \
+    [root@server]# dd if=/dev/vda | glance --os-image-api-version 1 image-create \
         --name "INSTANCENAME" --is-public false --disk-format raw \
         --container-format bare
 

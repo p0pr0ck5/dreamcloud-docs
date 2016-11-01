@@ -25,25 +25,25 @@ Before installing anything, it's usually a good idea to make sure that
 the rest of your system's packages are up to date. For all of the
 commands in this section, ssh into your Debian instance, and run:
 
-.. code:: bash
+.. code-block:: console
 
-    sudo apt-get update && sudo apt-get dist-upgrade
+    [user@server]$ sudo apt-get update && sudo apt-get dist-upgrade
 
 Dokku's repository is hosted on HTTPS, so the first step to installing
 it is:
 
-.. code:: bash
+.. code-block:: console
 
-    sudo apt-get install apt-transport-https
+    [user@server]$ sudo apt-get install apt-transport-https
 
 Now, we're going to import the keys for the Docker and Dokku
 repositories (the version of Docker that Debian Jessie ships with is too
 old for Dokku, so we're going to use the upstream Docker repository).
 
-.. code:: bash
+.. code-block:: console
 
-    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 0x2C52609D # this is the Docker key
-    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 0xD59097AB # this is the Dokku key
+    [user@server]$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 0x2C52609D # this is the Docker key
+    [user@server]$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 0xD59097AB # this is the Dokku key
 
 If you've already pointed a wildcard `DNS <215414867>`__ entry at this
 machine, you can
@@ -54,12 +54,12 @@ entry pointing at this IP address, you should set vhost\_enable to
 
 We're going to preconfigure dokku before we install it using debconf:
 
-.. code:: bash
+.. code-block:: console
 
-    echo 'dokku dokku/web_config boolean false' | sudo debconf-set-selections
-    echo 'dokku dokku/vhost_enable boolean true' | sudo debconf-set-selections
-    echo 'dokku dokku/hostname string [your-domain]' | sudo debconf-set-selections
-    echo 'dokku dokku/key_file string /home/admin/.ssh/id_rsa.pub' | sudo debconf-set-selections
+    [user@server]$ echo 'dokku dokku/web_config boolean false' | sudo debconf-set-selections
+    [user@server]$ echo 'dokku dokku/vhost_enable boolean true' | sudo debconf-set-selections
+    [user@server]$ echo 'dokku dokku/hostname string [your-domain]' | sudo debconf-set-selections
+    [user@server]$ echo 'dokku dokku/key_file string /home/admin/.ssh/id_rsa.pub' | sudo debconf-set-selections
 
 You should modify the configuration to suit your own setup, and make
 sure that you point at the right SSH public key file.
@@ -67,11 +67,11 @@ sure that you point at the right SSH public key file.
 Once you have the keys installed and dokku pre-configured, it's time to
 tell apt how to find the new repositories, and install dokku:
 
-.. code:: bash
+.. code-block:: console
 
-    echo 'deb https://apt.dockerproject.org/repo debian-jessie main' | sudo tee /etc/apt/sources.list.d/docker.list
-    echo 'deb https://packagecloud.io/dokku/dokku/ubuntu/ trusty main' | sudo tee /etc/apt/sources.list.d/dokku.list
-    sudo apt-get update && sudo apt-get install dokku
+    [user@server]$ echo 'deb https://apt.dockerproject.org/repo debian-jessie main' | sudo tee /etc/apt/sources.list.d/docker.list
+    [user@server]$ echo 'deb https://packagecloud.io/dokku/dokku/ubuntu/ trusty main' | sudo tee /etc/apt/sources.list.d/dokku.list
+    [user@server]$ sudo apt-get update && sudo apt-get install dokku
 
 Setting up your local git project
 ---------------------------------
@@ -80,9 +80,9 @@ If you want to play with this and you don't already have a
 buildpack-compatible project to deploy, you can clone this project I
 wrote in nodejs on your local machine to test your setup:
 
-.. code:: bash
+.. code-block:: console
 
-    local$ git clone git://github.com/clee/p90xcalgen
+    [user@localhost]$ git clone git://github.com/clee/p90xcalgen
 
 nodejs projects require a ``Procfile`` specifying how to run the server,
 and a ``package.json`` file describing the dependencies.
@@ -95,7 +95,7 @@ The project I linked to above uses this ``Procfile``:
 
 And this ``package.json``:
 
-.. code:: json
+.. code-block:: json
 
     {
         "name": "p90xcalgen",
@@ -130,16 +130,16 @@ a simple app with no database requirements like the example provided above.
 You'll need to tell dokku about your project before you can deploy it.
 On your Debian instance:
 
-.. code:: bash
+.. code-block:: console
 
-    dokku apps:create [project_name]
+    [user@localhost]$ dokku apps:create [project_name]
 
 On your local machine, in your project's source folder:
 
-.. code:: bash
+.. code-block:: console
 
-    git remote add dokku dokku@[dreamcompute-IP]:[project_name]
-    git push dokku master
+    [user@localhost]$ git remote add dokku dokku@[dreamcompute-IP]:[project_name]
+    [user@localhost]$ git push dokku master
 
 And voila! Assuming that you have configured everything correctly, you
 should now have a working deployed application.

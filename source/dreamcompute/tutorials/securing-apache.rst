@@ -94,7 +94,7 @@ Sensitive areas of websites, such as admin control panels, should have strict
 access controls placed on them. Access makes it easy to whitelist IP access to
 certain locations of your website and deny traffic to all other IP addresses:
 
-.. code::
+.. code-block:: apacheconf
 
     <Directory "/wp-admin">
 
@@ -116,22 +116,22 @@ Access to certain locations can also be set via password-based credentials,
 using the `htpasswd` utility. First, create a file called  `.htpasswd` to store
 the desired user/password combinations:
 
-.. code::
+.. code-block:: console
 
-    # htpasswd -c /path/to/.htpasswd user1
+    [root@server]# htpasswd -c /path/to/.htpasswd user1
 
 The `htpasswd` command creates the file `/path/to/.htpasswd` if it doesn't
 exist, and prompt for a password. To add another user, simply run the command,
 leaving out the `-c` argument:
 
-.. code::
+.. code-block:: console
 
-    # htpasswd /path/to/.htpasswd user2
+    [root@server]# htpasswd /path/to/.htpasswd user2
 
 Once you've created the user, configure Apache to read the password file and
 control access to the desired directory:
 
-.. code::
+.. code-block:: apacheconf
 
     <Directory "/wp-admin">
         AuthType Basic
@@ -198,7 +198,7 @@ Turn TLS On
 In order to serve encrypted traffic, SSL/TLS needs to be enabled in Apache.
 Enable secure communications with the `SSLEngine` directive:
 
-.. code::
+.. code-block:: apacheconf
 
     <VirtualHost 192.168.1.1:443>
         SSLEngine on
@@ -245,17 +245,17 @@ implement forward secrecy (essentially, another layer on top of existing
 encrypted messages). Mitigating this attack is possible in Apache by computing a
 unique set of Diffie-Hellman parameters and configuring Apache to use this value:
 
-.. code::
+.. code-block:: console
 
     # build a 2048-bit DH prime
-    $ openssl dhparam 2048 > /path/to/dhparam
+    [user@server]$ openssl dhparam 2048 > /path/to/dhparam
 
 From here, add the params to the end of the file noted in the
 `SSLCertificateFile` directive:
 
-.. code::
+.. code-block:: console
 
-    # cat /path/to/custom/dhparam >> /path/to/sslcertfile
+    [root@server]# cat /path/to/custom/dhparam >> /path/to/sslcertfile
 
 For more information on the Logjam attack, see https://weakdh.org/
 
@@ -273,7 +273,7 @@ the `Strict-Transport-Security` header:
 For all plaintext connections, configure Apache to send a 301 redirect for
 requests to the TLS version of the site:
 
-.. code::
+.. code-block:: apacheconf
 
     <VirtualHost 192.168.1.1:80>
         [...]

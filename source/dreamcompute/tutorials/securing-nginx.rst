@@ -34,19 +34,19 @@ we'll see in a bit). Building from source requires a few steps. First, we need
 the source archive, which we'll download from the office Nginx site. We'll use
 the current stable branch as of this writing, 1.10.1:
 
-.. code::
+.. code-block:: console
 
     # grab the latest tarball from the official Nginx website
     # we will use the latest stable, not mainline, version
-    $ wget http://nginx.org/download/nginx-1.10.1.tar.gz
+    [user@server]$ wget http://nginx.org/download/nginx-1.10.1.tar.gz
 
 We'll also want to grab the developer's signing key and verify the contents of
 our download. First, we'll need the signing key, which we can download from
 a public PGP keyserver:
 
-.. code::
+.. code-block:: console
 
-    $ gpg --keyserver pgp.mit.edu --recv a1c052f8
+    [user@server]$ gpg --keyserver pgp.mit.edu --recv a1c052f8
     gpg: requesting key A1C052F8 from hkp server pgp.mit.edu
     gpg: key A1C052F8: public key "Maxim Dounin <mdounin@mdounin.ru>" imported
     gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
@@ -58,30 +58,30 @@ a public PGP keyserver:
 
 Next, we'll grab the signature for this tarball:
 
-.. code::
+.. code-block:: console
 
-    $ wget http://nginx.org/download/nginx-1.10.1.tar.gz.asc
+    [user@server]$ wget http://nginx.org/download/nginx-1.10.1.tar.gz.asc
 
 And finally, we'll verify the signature:
 
-.. code::
+.. code-block:: console
 
-    $ gpg --verify nginx-1.10.1.tar.gz.asc nginx-1.10.1.tar.gz
+    [user@server]$ gpg --verify nginx-1.10.1.tar.gz.asc nginx-1.10.1.tar.gz
     gpg: Signature made Tue 31 May 2016 06:58:32 AM PDT using RSA key ID A1C052F8
     gpg: Good signature from "Maxim Dounin <mdounin@mdounin.ru>"
     Primary key fingerprint: B0F4 2533 73F8 F6F5 10D4  2178 520A 9993 A1C0 52F8
 
 From here, we will unpack the tarball, compile Nginx, and install it:
 
-.. code::
+.. code-block:: console
 
-    $ tar -zxf nginx-1.10.1.tar.gz
-    $ cd nginx-1.10.1/
-    $ ls
+    [user@server]$ tar -zxf nginx-1.10.1.tar.gz
+    [user@server]$ cd nginx-1.10.1/
+    [user@server]$ ls
         auto  CHANGES  CHANGES.ru  conf  configure
         contrib  html  LICENSE  man README  src
 
-    $ ./configure && make && make install
+    [user@server]$ ./configure && make && make install
 
 Removing Unnecessary Modules
 ----------------------------
@@ -95,10 +95,10 @@ vulnerability found in the uwsgi proxy would not be exploitable against a
 server that does not leverage the uswgi module). Removing modules can be done at
 compile-time via the configure script. For example:
 
-.. code::
+.. code-block:: console
 
     # disable the ngx_http_uwsgi_module
-    $ ./configure --without-http_uwsgi_module
+    [user@server]$ ./configure --without-http_uwsgi_module
 
 The configure script provided with the Nginx script provides a large number of
 compile-time options.
@@ -149,9 +149,9 @@ In the same vein, when Nginx is used to proxy requests from an upstream server
 in the upstream response (for example, the version of PHP running). For example,
 consider the following response from an Nginx server running a PHP application:
 
-.. code::
+.. code-block:: console
 
-    $ curl -I http://example.com
+    [user@server]$ curl -I http://example.com
     HTTP/1.1 200 OK
     Server: nginx
     Content-Type: text/html; charset=UTF-8
@@ -168,9 +168,9 @@ easy to hide with the `proxy_hide_header` directive:
 
 Our request to the same server would now look like:
 
-.. code::
+.. code-block:: console
 
-    $ curl -I http://example.com
+    [user@server]$ curl -I http://example.com
     HTTP/1.1 200 OK
     Server: nginx
     Content-Type: text/html; charset=UTF-8
@@ -303,10 +303,10 @@ implement forward secrecy (essentially, another layer on top of existing
 encrypted messages). Mitigating this attack is possible in Nginx by computing a
 unique set of Diffie-Hellman parameters and configuring Nginx to use this value:
 
-.. code::
+.. code-block:: console
 
     # build a 2048-bit DH prime
-    $ openssl dhparam 2048 > /path/to/dhparam
+    [user@server]$ openssl dhparam 2048 > /path/to/dhparam
 
 From here we only need to tell Nginx to use our custom values:
 

@@ -22,9 +22,9 @@ Installing prerequisites
 You must compile OpenResty from source on Ubuntu distributions. First, update
 the system package repository listings and install the following packages:
 
-.. code:: console
+.. code-block:: console
 
-    # apt-get update && apt-get -y install make gcc libssl-dev g++ \
+    [root@server]# apt-get update && apt-get -y install make gcc libssl-dev g++ \
         liblua5.1-0-dev python-minimal python2.7 libjson-perl git
 
 Preparing the source
@@ -32,10 +32,10 @@ Preparing the source
 
 Download and unpack the OpenResty source in a local directory:
 
-.. code:: console
+.. code-block:: console
 
-    # cd /usr/local/src
-    # wget https://openresty.org/download/openresty-1.11.2.1.tar.gz && \
+    [root@server]# cd /usr/local/src
+    [root@server]# wget https://openresty.org/download/openresty-1.11.2.1.tar.gz && \
         tar -zxf openresty-1.11.2.1.tar.gz
 
 Most web application firewalls use a number of pattern matching techniques when
@@ -49,9 +49,9 @@ of regular expressions which greatly improves regex matching performance.
 Because the version of PCRE provided by the default Ubuntu package does not contain
 JIT support, you must download and unpack the PCRE source:
 
-.. code:: console
+.. code-block:: console
 
-    # wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.bz2 \
+    [root@server]# wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.bz2 \
         && tar -jxf pcre-8.39.tar.bz2
 
 Note: Compiling and installing PCRE is not necessary, as it is statically compiled
@@ -62,9 +62,9 @@ Compiling OpenResty
 
 Build the OpenResty bundle from source and install it to the system:
 
-.. code:: console
+.. code-block:: console
 
-    # cd openresty-1.11.2.1 && ./configure --with-debug \
+    [root@server]# cd openresty-1.11.2.1 && ./configure --with-debug \
         --with-pcre=/usr/local/src/pcre-8.39 \
         --with-pcre-jit \
         --with-pcre-opt=-g && \
@@ -89,10 +89,10 @@ responding as expected.
 To test, add the following configuration snippet inside the existing `server` block
 located in the configuration file:
 
-.. code:: console
+.. code-block:: console
 
-    # cd /usr/local/openresty/nginx
-    # vi conf/nginx.conf
+    [root@server]# cd /usr/local/openresty/nginx
+    [root@server]# vi conf/nginx.conf
 
 .. code:: nginx
 
@@ -104,15 +104,15 @@ located in the configuration file:
 
 Once it completes, start Nginx:
 
-.. code:: console
+.. code-block:: console
 
-    # ./sbin/nginx
+    [root@server]# ./sbin/nginx
 
 Send a test request to the test location block:
 
-.. code:: console
+.. code-block:: console
 
-    # curl http://<instance-ip>/foo
+    [root@server]# curl http://<instance-ip>/foo
     Hello, world!
 
 Building lua-resty-waf
@@ -122,10 +122,10 @@ Once OpenResty is installed and working, download and install lua-resty-waf. The
 source for lua-resty-waf lives in a GitHub repo, so clone the repo to a local
 source, and then make and install the project:
 
-.. code:: console
+.. code-block:: console
 
-    # cd /usr/local/src
-    # git clone --recursive https://github.com/p0pr0ck5/lua-resty-waf.git && \
+    [root@server]# cd /usr/local/src
+    [root@server]# git clone --recursive https://github.com/p0pr0ck5/lua-resty-waf.git && \
         cd lua-resty-waf && \
         make && \
         make install
@@ -136,10 +136,10 @@ Configuring lua-resty-waf
 After installing lua-resty-waf, return to the Nginx config file and add the
 basic directives to run lua-resty-waf:
 
-.. code:: console
+.. code-block:: console
 
-    # cd /usr/local/openresty/nginx
-    # vi conf/nginx.conf
+    [root@server]# cd /usr/local/openresty/nginx
+    [root@server]# vi conf/nginx.conf
 
 Add the following directive to the `http` block, above the existing `server`
 block:
@@ -179,10 +179,10 @@ agents, cross-site scripting (XSS), and SQL injection (SQLi) attacks.
 
 To test, reload Nginx and send the following request:
 
-.. code:: console
+.. code-block:: console
 
-    # ./sbin/nginx -s reload
-    # curl 'http://<instance-ip>/foo?a=alert(1)'
+    [root@server]# ./sbin/nginx -s reload
+    [root@server]# curl 'http://<instance-ip>/foo?a=alert(1)'
 
 Nginx should return a 403 Forbidden response, instead of the 200 OK and
 'Hello, world!' received earlier.
@@ -210,18 +210,18 @@ directives to the previously created `access_by_lua_block`, above the
 
 Reload Nginx, and then send the test bad request again:
 
-.. code:: console
+.. code-block:: console
 
-    # ./sbin/nginx -s reload
-    # curl 'http://<instance-ip>/foo?a=alert(1)'
+    [root@server]# ./sbin/nginx -s reload
+    [root@server]# curl 'http://<instance-ip>/foo?a=alert(1)'
 
 lua-resty-waf creates the event log file and populates it with a JSON
 entry containing details about the request. JSON that is not pretty-printed can
 be hard to eyeball; instead, use the following snippet to clean up the log entry:
 
-.. code:: console
+.. code-block:: console
 
-    # perl -e '
+    [root@server]# perl -e '
         use JSON;
         print to_json(from_json(<>), { pretty => 1, canonical => 1 });
     ' < /tmp/waf.log

@@ -15,39 +15,39 @@ Installation
 
 Install Apache with the following command:
 
-.. code::
+.. code-block:: console
 
-    yum install httpd
+    [root@server]# yum install httpd
 
 Apache can be started and the system told to start it on boot with the
 commands:
 
-.. code::
+.. code-block:: console
 
-    systemctl start httpd
-    systemctl enable httpd
+    [root@server]# systemctl start httpd
+    [root@server]# systemctl enable httpd
 
 Install MariaDB client and server with the following command:
 
-.. code::
+.. code-block:: console
 
-    yum install MariaDB-server
+    [root@server]# yum install MariaDB-server
 
 MariaDB can be started and the system told to start it on boot with these
 commands:
 
-.. code::
+.. code-block:: console
 
-    systemctl start MariaDB
-    systemctl enable MariaDB
+    [root@server]# systemctl start MariaDB
+    [root@server]# systemctl enable MariaDB
 
 Both operating systems use "MariaDB" for the service start.
 
 PHP can be installed with the following command:
 
-.. code::
+.. code-block:: console
 
-    yum install php php-mysql
+    [root@server]# yum install php php-mysql
 
 There is no startup script for php.
 

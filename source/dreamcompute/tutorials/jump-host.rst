@@ -52,9 +52,9 @@ jump host called “jump”. Change $username to the default user for your image
 
 #. Ensure you can log into your jump host with SSH:
 
-    .. code::
+    .. code-block:: console
 
-        ssh jump
+        [user@localhost]$ ssh jump
 
 #. Once you verify that it works, update the SSH config to send all
    traffic from your machine to the private DreamCompute network
@@ -80,9 +80,9 @@ jump host called “jump”. Change $username to the default user for your image
 #. To connect to your private instances from a local machine, SSH to
    the private IP:
 
-    .. code::
+    .. code-block:: console
 
-        ssh 10.10.10.5
+        [user@localhost]$ ssh 10.10.10.5
 
 .. _how to upload SSH keys in DreamCompute: 214843617-How-to-upload-an-SSH-key-via-the-web-UI
 

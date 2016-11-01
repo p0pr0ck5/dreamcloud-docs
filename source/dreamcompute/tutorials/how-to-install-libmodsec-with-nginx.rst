@@ -15,9 +15,9 @@ Building libmodsecurity
 First, install the necessary packages and libraries used to build source
 projects, as well as libraries used specifically by libmodsecurity:
 
-.. code::
+.. code-block:: console
 
-    # apt-get install automake gcc make pkg-config libtool g++ libfl-dev bison \
+    [root@server]# apt-get install automake gcc make pkg-config libtool g++ libfl-dev bison \
         build-essential libbison-dev libyajl-dev liblmdb-dev libpcre3-dev \
         libcurl4-openssl-dev libgeoip-dev libxml2-dev
 
@@ -25,9 +25,9 @@ projects, as well as libraries used specifically by libmodsecurity:
 Next, download and unpack the most recent source of libmodsecurity. This is
 available from the ModSecurity GitHub project, on the `libmodsecurity` branch:
 
-.. code::
+.. code-block:: console
 
-    # git clone https://github.com/SpiderLabs/ModSecurity
+    [root@server]# git clone https://github.com/SpiderLabs/ModSecurity
     Cloning into 'ModSecurity'...
     remote: Counting objects: 20508, done.
     remote: Compressing objects: 100% (72/72), done.
@@ -35,22 +35,25 @@ available from the ModSecurity GitHub project, on the `libmodsecurity` branch:
     Receiving objects: 100% (20508/20508), 33.93 MiB | 9.49 MiB/s, done.
     Resolving deltas: 100% (14572/14572), done.
     Checking connectivity... done.
-    # cd ModSecurity/
-    ~/ModSecurity# git checkout -b origin/libmodsecurity
+
+.. code-block:: console
+
+    [root@server]# cd ModSecurity/
+    [root@server]# git checkout -b origin/libmodsecurity
     Switched to a new branch 'origin/libmodsecurity'
 
 Initialize and update the git submodules that libmodsecurity requires:
 
-.. code::
+.. code-block:: console
 
-    ~/ModSecurity# git submodule init
-    ~/ModSecurity# git submodule update
+    [root@server]# git submodule init
+    [root@server]# git submodule update
 
 Finally, configure, build, and install the libmodsecurity library:
 
-.. code::
+.. code-block:: console
 
-    ~/ModSecurity# ./build.sh && ./configure && make && make install
+    [root@server]# ./build.sh && ./configure && make && make install
 
 Building Nginx with libmodsecurity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,22 +64,22 @@ to load libmodsecurity and process requests.
 
 First, grab the source for the Nginx module wraps around libmodsecurity:
 
-.. code::
+.. code-block:: console
 
-    # git clone https://github.com/SpiderLabs/ModSecurity-nginx.git
+    [root@server]# git clone https://github.com/SpiderLabs/ModSecurity-nginx.git
 
 Next, grab the Nginx source and verify it:
 
-.. code::
+.. code-block:: console
 
-    # wget http://nginx.org/download/nginx-1.10.1.tar.gz
+    [root@server]# wget http://nginx.org/download/nginx-1.10.1.tar.gz
 
 It's also important to grab the developer's signing key and verify the contents
 of the download:
 
-.. code::
+.. code-block:: console
 
-    # gpg --keyserver pgp.mit.edu --recv a1c052f8
+    [root@server]# gpg --keyserver pgp.mit.edu --recv a1c052f8
     gpg: requesting key A1C052F8 from hkp server pgp.mit.edu
     gpg: key A1C052F8: public key "Maxim Dounin <mdounin@mdounin.ru>" imported
     gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
@@ -88,15 +91,15 @@ of the download:
 
 Next, grab the signature for this tarball:
 
-.. code::
+.. code-block:: console
 
-    # wget http://nginx.org/download/nginx-1.10.1.tar.gz.asc
+    [root@server]# wget http://nginx.org/download/nginx-1.10.1.tar.gz.asc
 
 And finally, verify the signature:
 
-.. code::
+.. code-block:: console
 
-    # gpg --verify nginx-1.10.1.tar.gz.asc nginx-1.10.1.tar.gz
+    [root@server]# gpg --verify nginx-1.10.1.tar.gz.asc nginx-1.10.1.tar.gz
     gpg: Signature made Tue 31 May 2016 06:58:32 AM PDT using RSA key ID A1C052F8
     gpg: Good signature from "Maxim Dounin <mdounin@mdounin.ru>"
     Primary key fingerprint: B0F4 2533 73F8 F6F5 10D4  2178 520A 9993 A1C0 52F8
@@ -104,21 +107,17 @@ And finally, verify the signature:
 From here, configure Nginx with the `--add-module=` option, pointing to the
 ModSecurity-nginx module that was previously downloaded:
 
-.. code::
+.. code-block:: console
 
-    # tar -zxf nginx-1.10.1.tar.gz
-    # cd nginx-1.10.1/
-    ~/nginx-1.10.1# ls
-        auto  CHANGES  CHANGES.ru  conf  configure
-        contrib  html  LICENSE  man README  src
-
-    ~/nginx-1.10.1# ./configure --add-module=/root/ModSecurity-nginx
+    [root@server]# tar -zxf nginx-1.10.1.tar.gz
+    [root@server]# cd nginx-1.10.1/
+    [root@server]# ./configure --add-module=/root/ModSecurity-nginx
 
 From here, simply build and install Nginx:
 
-.. code::
+.. code-block:: console
 
-    ~/nginx-1.10.1# make && make install
+    [root@server]# make && make install
 
 Configuring libmodsecurity in Nginx
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -140,9 +139,9 @@ These directives can be added inside the `http` block, or one or more `server`
 or `location` blocks. Once this is added, reload Nginx. This rule can now be
 tested by sending a regular request to Nginx and examining the output:
 
-.. code::
+.. code-block:: console
 
-    # curl -D - -s -o /dev/null localhost/
+    [root@server]# curl -D - -s -o /dev/null localhost/
     HTTP/1.1 200 OK
     Server: nginx/1.10.1
     Date: Wed, 13 Jul 2016 18:06:15 GMT
@@ -157,9 +156,9 @@ The single rule added via the `modsecurity_rules` directive will deny requests
 that have the word `test` inside a GET or POST argument. This can be seen by
 changing the curl test:
 
-.. code::
+.. code-block:: console
 
-    # curl -D - -s -o /dev/null localhost/?a=test
+    [root@server]# curl -D - -s -o /dev/null localhost/?a=test
     HTTP/1.1 403 Forbidden
     Server: nginx/1.10.1
     Date: Wed, 13 Jul 2016 18:06:19 GMT

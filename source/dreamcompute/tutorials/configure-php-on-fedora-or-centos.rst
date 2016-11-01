@@ -22,9 +22,9 @@ PHP Apache Module + CLI Only
 
 To install the main PHP package, run the following yum command:
 
-.. code::
+.. code-block:: console
 
-    yum install php
+    [root@server]# yum install php
 
 This installs the php-cli, php apache module and apache if it isn't selected
 already.
@@ -61,9 +61,9 @@ to all available packages at the bottom.
 Additional modules for php5 can be found on the respective packages pages for
 each operating system or by issuing the below yum command:
 
-.. code::
+.. code-block:: console
 
-    yum list php-\*
+    [root@server]# yum list php-\*
 
 `Fedora Packages for PHP5 <https://admin.fedoraproject.org/pkgdb/packages/php-%2A/>`_
 

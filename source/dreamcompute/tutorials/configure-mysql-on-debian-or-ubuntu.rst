@@ -32,18 +32,18 @@ Ubuntu 14.04 LTS:
 To install MySQL on your system, run the following commands with the desired
 mysql version, such as:
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get update
-    sudo apt-get install mysql-server
+    [user@server]$ sudo apt-get update
+    [user@server]$ sudo apt-get install mysql-server
 
 The install process asks you to confirm if you wish to install any additional
 packages needed for this installation of MySQL.  Confirm by entering "**y**"
 and hitting enter.
 
-.. code::
+.. code-block:: console
 
-    # apt-get install mysql-server
+    [user@server]$ sudo apt-get install mysql-server
     Reading package lists... Done
     Building dependency tree
     Reading state information... Done
@@ -88,9 +88,9 @@ The configuration files are stored in the /etc/mysql directory.  If any
 changes are made, you must restart MySQL for it to read the them.  This can be
 done by running:
 
-.. code::
+.. code-block:: console
 
-    service mysql restart
+    [user@server]$ sudo service mysql restart
 
 Main configuration file /etc/mysql/my.cnf
 -----------------------------------------
@@ -123,9 +123,9 @@ Resetting the root password
 If you forget the root password, it can be reset by running this command and
 entering in a new password twice.
 
-.. code::
+.. code-block:: console
 
-    dpkg-reconfigure mysql-server-5.5
+    [user@server]$ dpkg-reconfigure mysql-server-5.5
 
 Connecting to mysql shell
 -------------------------
@@ -135,27 +135,27 @@ users, you can run these commands.
 
 Via socket (should work even if "bind" is changed in my.cnf):
 
-.. code::
+.. code-block:: console
 
-    mysql -S /var/run/mysqld/mysqld.sock -u root -p
+    [user@server]$ mysql -S /var/run/mysqld/mysqld.sock -u root -p
 
 Via IP address:
 
-.. code::
+.. code-block:: console
 
-    mysql -h 10.10.10.X -u root -p
+    [user@server]$ mysql -h 10.10.10.X -u root -p
 
 Via localhost:
 
-.. code::
+.. code-block:: console
 
-    mysql -h localhost -u root -p
+    [user@server]$ mysql -h localhost -u root -p
 
 or just:
 
-.. code::
+.. code-block:: console
 
-    mysql -u root -p
+    [user@server]$ mysql -u root -p
 
 .. meta::
     :labels: mysql debian ubuntu

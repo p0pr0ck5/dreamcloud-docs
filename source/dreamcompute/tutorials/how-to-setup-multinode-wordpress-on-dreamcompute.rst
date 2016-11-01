@@ -103,16 +103,16 @@ Next, you must create a database for WordPress and a user that has
 access to that database. Connect to the database as root by running
 the following:
 
-.. code:: console
+.. code-block:: console
 
-    [user@mysqlserver] mysql -u root -p
+    [user@mysqlserver]$ mysql -u root -p
     Enter password:
     mysql>
 
 Then, to create the database and a user that has access to it, run the
 following:
 
-.. code::
+.. code-block:: sql
 
     mysql> CREATE DATABASE wordpress;
     mysql> GRANT ALL ON wordpress.* TO wordpress@'10.10.10.%' IDENTIFIED by 'PASSWORD';
@@ -155,7 +155,7 @@ same server as your MySQL server.
 
 To install NFS packages on Ubuntu:
 
-.. code:: console
+.. code-block:: console
 
     [user@mysqlserver] sudo apt update
     [user@mysqlserver] sudo apt install nfs-kernel-server
@@ -166,7 +166,7 @@ Configuration
 To configure NFS, create a directory to be exported to other servers
 and make its content owned by the www-data user and group:
 
-.. code:: console
+.. code-block:: console
 
     [user@mysqlserver] sudo mkdir -p /exports/www
     [user@mysqlserver] sudo chown www-data:www-data /exports/www
@@ -211,7 +211,7 @@ Installing a LAMP stack
 WordPress requires a webserver stack, such as Apache2 and PHP
 interpreter:
 
-.. code:: console
+.. code-block:: console
 
     [user@web] sudo apt update
     [user@web] sudo apt install apache2
@@ -224,7 +224,7 @@ Mounting /exports/www
 Before installing WordPress, configure both webservers to mount the
 /exports/www/ directory from the NFS server.
 
-.. code:: console
+.. code-block:: console
 
     [user@web] sudo apt install nfs-common
     [user@web] sudo mkdir -p /var/www
@@ -259,7 +259,7 @@ Configuration
 In /var/www (the root of your WordPress site), edit the file
 config.php and add the following to it:
 
-.. code:: php
+.. code-block:: php
 
     if ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') $_SERVER['HTTPS']='on';
 
@@ -292,7 +292,7 @@ Installation
 
 HAProxy is packaged in Ubuntu:
 
-.. code:: console
+.. code-block:: console
 
     [user@haproxy] sudo apt update
     [user@haproxy] sudo apt install haproxy
@@ -308,7 +308,7 @@ secure your website.
 
 First, download the Let's Encrypt tools:
 
-.. code:: console
+.. code-block:: console
 
     [user@haproxy] sudo -s
     [root@haproxy] cd /opt
@@ -316,7 +316,7 @@ First, download the Let's Encrypt tools:
 
 Then, request a certificate:
 
-.. code:: console
+.. code-block:: console
 
     [root@haproxy] cd /opt/letsencrypt
     [root@haproxy] ./letsencrypt-auto certonly --standalone -d example.com
@@ -326,7 +326,7 @@ certificates and keys.
 
 Finally, put the certs into the right place:
 
-.. code:: console
+.. code-block:: console
 
     [root@haproxy] mkdir -p /etc/ssl/example.com/privkey.pem
     [root@haproxy] cd /etc/letsencrypt/live/example.com/

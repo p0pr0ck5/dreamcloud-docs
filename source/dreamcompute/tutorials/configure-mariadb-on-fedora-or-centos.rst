@@ -8,9 +8,9 @@ Installing MariaDB
 To install MariaDB on your system, run the following commands with the desired
 MariaDB version, such as:
 
-.. code::
+.. code-block:: console
 
-    sudo yum install mariadb-server
+    [root@server]# yum install mariadb-server
 
 The install process asks you to confirm if you wish to install any additional
 packages needed for this installation of MariaDB.  Confirm by entering "**y**"
@@ -48,10 +48,10 @@ and hitting enter.
 After the installation completes, you should start the service and configure
 mariadb by running the following commands as root
 
-.. code::
+.. code-block:: console
 
-    systemctl start mariadb
-    mysql_secure_installation
+    [root@server]# systemctl start mariadb
+    [root@server]# mysql_secure_installation
 
 If you enter a password, another dialog box will come up for you to re-enter
 the password to confirm.
@@ -59,9 +59,9 @@ the password to confirm.
 If you want MariaDB to start automatically after a reboot, run the following as
 root
 
-.. code::
+.. code-block:: console
 
-    systemctl enable mariadb
+    [root@server]# systemctl enable mariadb
 
 Configuring and Using MariaDB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,9 +70,9 @@ The configuration files are stored in the /etc and /etc/my.cnf.d directories.
 If any changes are made, you must restart MariaDB for it to read the them.
 This can be done by logging in as root and running:
 
-.. code::
+.. code-block:: console
 
-    systemctl restart mariadb
+    [root@server]# systemctl restart mariadb
 
 Main configuration file /etc/my.cnf
 -----------------------------------
@@ -105,9 +105,9 @@ Resetting the root password
 If you forget the root password, it can be reset by running this command and
 entering in a new password twice.
 
-.. code::
+.. code-block:: console
 
-    /usr/bin/mysqladmin -u root password 'new-password' -p
+    [root@server]# /usr/bin/mysqladmin -u root password 'new-password' -p
 
 Connecting to MariaDB with a shell
 ----------------------------------
@@ -117,27 +117,27 @@ users, you can run these commands.
 
 Via socket (should work even if "bind" is changed in my.cnf):
 
-.. code::
+.. code-block:: console
 
-    mysql -S /var/lib/mysql/mysql.sock -u root -p
+    [user@server]$ mysql -S /var/lib/mysql/mysql.sock -u root -p
 
 Via IP address:
 
-.. code::
+.. code-block:: console
 
-    mysql -h 10.10.10.X -u root -p
+    [user@server]$ mysql -h 10.10.10.X -u root -p
 
 Via localhost:
 
-.. code::
+.. code-block:: console
 
-    mysql -h localhost -u root -p
+    [user@server]$ mysql -h localhost -u root -p
 
 or just:
 
-.. code::
+.. code-block:: console
 
-    mysql -u root -p
+    [user@server]$ mysql -u root -p
 
 .. meta::
     :labels: mariadb mysql fedora centos

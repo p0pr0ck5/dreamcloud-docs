@@ -26,9 +26,9 @@ on `how to configure LAMP
 <215879467-How-to-Configure-LAMP-on-DreamCompute-running-Debian-or-Ubuntu>`_
 but the overview is as follows:
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get install lamp-server^
+    [user@server]$ sudo apt-get install lamp-server^
 
 This is interactive, so you'll be asked 'are you sure?' in some places, and
 in others it will want a password for SQL. Make up a secure password for SQL
@@ -37,15 +37,15 @@ and save it as you will need this later to set up SQL for WordPress.
 After it runs, you'll want to add mod_rewrite so WordPress can make pretty
 pages:
 
-.. code::
+.. code-block:: console
 
-    sudo a2enmod rewrite
+    [user@server]$ sudo a2enmod rewrite
 
 Finally restart apache:
 
-.. code::
+.. code-block:: console
 
-    sudo service apache2 restart
+    [user@server]$ sudo service apache2 restart
 
 At this point, your server will be accessible via its IP address.
 
@@ -60,17 +60,17 @@ containing the damage just to that user account.
 
 To do this, we make a folder for the website:
 
-.. code::
+.. code-block:: console
 
-    sudo mkdir /var/www/example.com
+    [user@server]$ sudo mkdir /var/www/example.com
 
 And we create a user and give them access:
 
-.. code::
+.. code-block:: console
 
-    sudo adduser wp_example
-    sudo adduser wp_example www-data
-    sudo chown -R wp_example:www-data /var/www/example.com/
+    [user@server]$ sudo adduser wp_example
+    [user@server]$ sudo adduser wp_example www-data
+    [user@server]$ sudo chown -R wp_example:www-data /var/www/example.com/
 
 The reason we add the users to the www-data group is to allow Ubuntu to properly
 manage WordPress updates and images.
@@ -83,16 +83,16 @@ WordPress. By default, this is disabled, so you will need to edit your config
 using a text editor, such as vi, emacs, or nano (this one is easiest for
 beginners).
 
-.. code::
+.. code-block:: console
 
-    sudo vi /etc/ssh/sshd_config
+    [user@server]$ sudo vi /etc/ssh/sshd_config
 
 Look for the setting of PasswordAuthentication, change it to "yes", and save
 your file. Remember to restart SSHD once you've done this.
 
-.. code::
+.. code-block:: console
 
-    sudo service sshd restart
+    [user@server]$ sudo service sshd restart
 
 Will this make your server less secure? Not significantly. As this new account
 only has access to itself, it can only hack itself.
@@ -108,16 +108,16 @@ the domain.
 
 To do this, you need to make a .conf file:
 
-.. code::
+.. code-block:: console
 
-    sudo touch /etc/apache2/sites-available/example.com.conf
+    [user@server]$ sudo touch /etc/apache2/sites-available/example.com.conf
 
 It's recommended you name the file after your domain, so you can always know
 what file is for what domain.
 
 Edit that file and put this in:
 
-.. code::
+.. code-block:: apacheconf
 
     <VirtualHost *:80>
         ServerName example.com
@@ -134,9 +134,9 @@ Edit that file and put this in:
 Once the site is added, we'll need to enable it via a command called a2ensite
 (if you want to disable, it's a2dissite):
 
-.. code::
+.. code-block:: console
 
-    sudo a2ensite
+    [user@server]$ sudo a2ensite
 
 This will prompt you to pick what site you want to enable. Type it in, hit
 enter, and you'll be told what's next.
@@ -153,24 +153,24 @@ enter, and you'll be told what's next.
 Remember this command. It's a fast way to enable sites without having to rename
 or mess with files. Finally bounce your apache service so it reads the changes:
 
-.. code::
+.. code-block:: console
 
-    sudo service apache2 reload
+    [user@server]$ sudo service apache2 reload
 
 Create the Database and Users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 WordPress absolutely requires a database. You'll want to create one
 
-.. code::
+.. code-block:: console
 
-    mysql -u root -p
+    [user@server]$ mysql -u root -p
 
 Remember the password we set earlier? That's what it's for.
 
 Your command prompt will be `mysql>` so let's make the database:
 
-.. code::
+.. code-block:: sql
 
     mysql> CREATE DATABASE examplecom_wordpress;
     mysql> GRANT ALL ON examplecom_wordpress.* TO examplecom@localhost IDENTIFIED by 'PASSWORD';
@@ -179,9 +179,9 @@ Remember to change PASSWORD to an actually secure password.
 
 You can check this by running the following command:
 
-.. code::
+.. code-block:: console
 
-    mysql -u examplecom -p examplecom_wordpress
+    [user@server]$ mysql -u examplecom -p examplecom_wordpress
 
 Install WP-CLI
 ~~~~~~~~~~~~~~
@@ -191,23 +191,23 @@ While this is optional, we strongly recommend this. DreamHost includes `WP-CLI
 in as your default user (not the web user we created earlier) and run the
 following:
 
-.. code::
+.. code-block:: console
 
-    cd ~
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    [user@server]$ cd ~
+    [user@server]$ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 Check that it works:
 
-.. code::
+.. code-block:: console
 
-    php wp-cli.phar --info
+    [user@server]$ php wp-cli.phar --info
 
 And if it does move it so everyone can use it!
 
-.. code::
+.. code-block:: console
 
-    chmod +x wp-cli.phar
-    sudo mv wp-cli.phar /usr/local/bin/wp
+    [user@server]$ chmod +x wp-cli.phar
+    [user@server]$ sudo mv wp-cli.phar /usr/local/bin/wp
 
 That will make it accessible for all users.
 
@@ -217,18 +217,18 @@ Install WordPress
 Log into your server as your WordPress SSH account (wp_example) and go to your
 webfolder. If you've installed WP-CLI, then all you have to do is this:
 
-.. code::
+.. code-block:: console
 
-    wp core download
+    [wp_example@server]$ wp core download
 
 If you go to http://example.com now you'll get that 5 minute install page.
 
 Of course since you have wp-cli you can also do this:
 
-.. code::
+.. code-block:: console
 
-    wp core config --dbname=examplecom_wordpress --dbuser=examplecom --dbpass=PASSWORD
-    wp core install --url=http://example.com --title=DreamComputePress --admin_user=YOURUSERNAME --admin_password=PASSWORD --admin_email=admin@example.com --skip-email
+    [wp_example@server]$ wp core config --dbname=examplecom_wordpress --dbuser=examplecom --dbpass=PASSWORD
+    [wp_example@server]$ wp core install --url=http://example.com --title=DreamComputePress --admin_user=YOURUSERNAME --admin_password=PASSWORD --admin_email=admin@example.com --skip-email
 
 If you use secure passwords like cWG8j8FPPj{T9UDL_PW8 then you MUST put quotes
 around the password.
@@ -242,18 +242,18 @@ The following will make WordPress run even better, but aren't required.
 
 Make sure apt has the latest and greatest.
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get -y update
+    [user@server]$ sudo apt-get -y update
 
 Make PHP Better
 ~~~~~~~~~~~~~~~
 
 If you use a lot of media, install these to improve how PHP processes images.
 
-.. code::
+.. code-block:: console
 
-    sudo apt install php-imagick php7.0-gd
+    [user@server]$ sudo apt install php-imagick php7.0-gd
 
 Run a restart of apache when you're done:
 
@@ -263,27 +263,27 @@ Troubleshooting
 If WordPress can't save files, you probably forgot to put your user in the right
 group:
 
-.. code::
+.. code-block:: console
 
-    sudo adduser wp_example www-data
-    sudo chown -R wp_example:www-data /var/www/example.com/
+    [user@server]$ sudo adduser wp_example www-data
+    [user@server]$ sudo chown -R wp_example:www-data /var/www/example.com/
 
 If that still doesn't work, try this:
 
-.. code::
+.. code-block:: console
 
-    sudo chgrp -R www-data /var/www/example.com/
-    sudo chmod -R g+w /var/www/example.com/
+    [user@server]$ sudo chgrp -R www-data /var/www/example.com/
+    [user@server]$ sudo chmod -R g+w /var/www/example.com/
 
 If pretty permalinks don't work, make sure you installed rewrite:
 
-.. code::
+.. code-block:: console
 
-    sudo a2enmod rewrite && sudo service apache2 restart
+    [user@server]$ sudo a2enmod rewrite && sudo service apache2 restart
 
 And make absolutely sure you have AllowOverride set to All in your Virtual Host:
 
-.. code::
+.. code-block:: apacheconf
 
     <Directory /var/www/example.com>
         AllowOverride all

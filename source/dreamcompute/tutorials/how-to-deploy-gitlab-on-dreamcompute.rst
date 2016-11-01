@@ -19,23 +19,23 @@ Installing GitLab
 -----------------
 Once you have an Ubuntu 16.04 server running, ssh in with
 
-.. code-block:: shell
+.. code-block:: console
 
-    ssh ubuntu@floatingip
+    [user@localhost]$ ssh user@floatingip
 
 replacing "floatingip" with the ip address of your server, then run
 
-.. code-block:: shell
+.. code-block:: console
 
-    sudo apt install postfix
+    [user@server]$ sudo apt install postfix
 
 In the postfix installer, select "Internet site". In order to get the package
 for GitLab and install it run the following.
 
-.. code-block:: shell
+.. code-block:: console
 
-    curl -LJO https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/xenial/gitlab-ce_8.8.4-ce.0_amd64.deb/download
-    sudo dpkg -i gitlab-ce_8.8.4-ce.0_amd64.deb
+    [user@server]$ curl -LJO https://packages.gitlab.com/gitlab/gitlab-ce/packages/ubuntu/xenial/gitlab-ce_8.8.4-ce.0_amd64.deb/download
+    [user@server]$ sudo dpkg -i gitlab-ce_8.8.4-ce.0_amd64.deb
 
 .. Note::
 
@@ -46,9 +46,9 @@ for GitLab and install it run the following.
 Configuration
 -------------
 
-.. code-block:: shell
+.. code-block:: console
 
-    sudo gitlab-ctl reconfigure
+    [user@server]$ sudo gitlab-ctl reconfigure
 
 Congrats, you are now running GitLab. The last thing you need to do is visit
 gitlab in a web browser by going to the ip of your server, then use the webpage

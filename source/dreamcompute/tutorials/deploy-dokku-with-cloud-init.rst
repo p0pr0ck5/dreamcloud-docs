@@ -28,8 +28,8 @@ using the `openstack` command line client, for example. Download the
 
 .. code:: bash
 
-   $ source openrc.sh
-   $ openstack server create \
+   [user@localhost]$ source openrc.sh
+   [user@localhost]$ openstack server create \
        --image Ubuntu-14.04 \
        --flavor gp1.semisonic \
        --security-group default \

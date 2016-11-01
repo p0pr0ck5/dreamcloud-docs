@@ -82,29 +82,29 @@ Structure as recommended by Roots is
 
 Set up a directory for your project:
 
-.. code::
+.. code-block:: console
 
-     $ mkdir example.com && cd example.com
+     [user@localhost]$ mkdir example.com && cd example.com
 
 
 Then clone the repository:
 
-.. code::
+.. code-block:: console
 
-     git clone --depth=1 git@github.com:roots/trellis.git && rm -rf trellis/.git
+     [user@localhost]$ git clone --depth=1 git@github.com:roots/trellis.git && rm -rf trellis/.git
 
 
 Clone Bedrock:
 
-.. code::
+.. code-block:: console
 
-    git clone --depth=1 git@github.com:roots/bedrock.git site && rm -rf site/.git
+    [user@localhost]$ git clone --depth=1 git@github.com:roots/bedrock.git site && rm -rf site/.git
 
 Install the Galaxy Ansible Roles
 
-.. code::
+.. code-block:: console
 
-    cd trellis && ansible-galaxy install -r requirements.yml
+    [user@localhost]$ cd trellis && ansible-galaxy install -r requirements.yml
 
 
 
@@ -174,9 +174,9 @@ They were discussed under installation earlier!
 Then run the vagrant command from the command line. Do this inside the
 trellis folder where the Vagrant File is:
 
-.. code::
+.. code-block:: console
 
-    vagrant up
+    [user@localhost]$ vagrant up
 
 
 Bedrock
@@ -198,9 +198,9 @@ recent version of Ubuntu, Ubuntu 16.0.4. However, you will then be
 forced to install an older version of Python - 2.x - side by side
 with Python 3 on your DreamCompute instance. This you can do using:
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get install python
+    [user@server]$ sudo apt-get install python
 
 If you do not mind this extra step then do go ahead. Always nice to run a
 more recent Ubuntu version, isn't it?
@@ -357,9 +357,9 @@ Double check you have done the following:
 
 When all that is good you can go ahead and push to the remote server using:
 
-.. code::
+.. code-block:: console
 
-    ansible-playbook server.yml -e env=<environment>
+    [user@localhost]$ ansible-playbook server.yml -e env=<environment>
 
 Here *environment* will be production if you are pushing to production.
 Staging is the other option.
@@ -390,9 +390,9 @@ did for provisioning:
 
 You can deploy with a single command:
 
-.. code::
+.. code-block:: console
 
-    ./deploy.sh <environment> <domain>
+    [user@localhost]$ ./deploy.sh <environment> <domain>
 
 where the environment can again be staging or production .
 

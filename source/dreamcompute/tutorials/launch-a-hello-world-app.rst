@@ -23,11 +23,11 @@ started:
 5. Install the `helloworld` Python package in this repository, ``shade``, and
    ``ansible``:
 
-.. code:: bash
+.. code-block:: console
 
-    virtualenv venv && . venv/bin/activate
-    git clone https://github.com/ryanpetrello/dreamcompute-hello-world.git hello-world
-    cd hello-world && pip install -e . shade ansible
+    [user@localhost]$ virtualenv venv && . venv/bin/activate
+    [user@localhost]$ git clone https://github.com/ryanpetrello/dreamcompute-hello-world.git hello-world
+    [user@localhost]$ cd hello-world && pip install -e . shade ansible
 
 Python and WSGI
 ~~~~~~~~~~~~~~~
@@ -37,7 +37,7 @@ that responds to all HTTP requests with ``Hello, World!`` WSGI is a Python
 protocol that allows a web server to interface with a Python callable (or
 function) to handle each request. Our function looks like this:
 
-.. code:: python
+.. code-block:: python
 
     def application(environ, start_response):
           data = "Hello, World!\n"
@@ -72,9 +72,9 @@ After the shell script downloads, open your
 computer's command line and run the following (substituting the actual
 location of your downloaded file).
 
-.. code:: bash
+.. code-block:: console
 
-    source /path/to/downloaded/file/dhc123456789-openrc.sh
+    [user@localhost]$ source /path/to/downloaded/file/dhc123456789-openrc.sh
 
 You are prompted for a password - it's the one you use to log in to the
 DreamCompute Dashboard.
@@ -82,10 +82,10 @@ DreamCompute Dashboard.
 At this point you should be ready to deploy your application. Do so by running
 the following commands:
 
-.. code:: bash
+.. code-block:: console
 
-    chmod 600 /path/to/keyname.pem
-    ansible-playbook -vvvv -i "localhost," playbooks/deploy.yml --extra-vars "key_name=keyname private_key=/path/to/keyname.pem"
+    [user@localhost]$ chmod 600 /path/to/keyname.pem
+    [user@localhost]$ ansible-playbook -vvvv -i "localhost," playbooks/deploy.yml --extra-vars "key_name=keyname private_key=/path/to/keyname.pem"
 
 You need to substitute the ``keyname`` key name value for the actual name
 you chose earlier, and you also need to replace ``/path/to/keyname.pem``
@@ -100,9 +100,9 @@ Example Server Architecture
 
 If you ``ssh`` into your newly created server:
 
-.. code:: bash
+.. code-block:: console
 
-    ssh -i /path/to/keyname.pem user@1.2.3.4
+    [user@localhost]$ ssh -i /path/to/keyname.pem user@1.2.3.4
 
 you find a variety of processes running in the following configuration:
 

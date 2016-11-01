@@ -20,17 +20,17 @@ On Ubuntu 16.04 that can be done with one simple command.
     http://docs.ansible.com/ansible/intro_installation.html#latest-releases-via-pip
     to figure out how to install ansible on your system
 
-.. code::
+.. code-block:: console
 
-    $ sudo apt-get install -y ansible python2.7 python-virtualenv python-pip
+    [user@localhost]$ sudo apt-get install -y ansible python2.7 python-virtualenv python-pip
 
 Type in your password for sudo (If you have one). It then will download some
 packages and install them. Next we need to install shade in a virtual
 environment as Ansible depends on it.
 
-.. code::
+.. code-block:: console
 
-    $ virtualenv -p /usr/bin/python2 venv && source venv/bin/activate && pip \
+    [user@localhost]$ virtualenv -p /usr/bin/python2 venv && source venv/bin/activate && pip \
           install shade
 
 Now you have shade installed and are ready to start writing Ansible
@@ -121,9 +121,9 @@ Running the Ansible Playbook
 
 The Ansible playbook can be run with the following command:
 
-.. code::
+.. code-block:: console
 
-    $ ansible-playbook launch-server.yaml
+    [user@localhost]$ ansible-playbook launch-server.yaml
 
 You should see output like
 

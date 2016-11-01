@@ -148,18 +148,18 @@ Running the Ansible Playbook
 
 The Ansible playbook can be run with the following command:
 
-.. code::
+.. code-block:: console
 
-    $ ansible-playbook mariadb-server.yaml
+    [user@localhost]$ ansible-playbook mariadb-server.yaml
 
 You'll soon see on `DreamCompute web UI
 <https://iad2.dreamcompute.com/project/instances/>`_ the new instance
 and the new volume. Login into the new machine and check that the
 database is really there:
 
-.. code::
+.. code-block:: console
 
-    $ sudo mysql backend_db
+    [user@localhost]$ sudo mysql backend_db
     Welcome to the MariaDB monitor.  Commands end with ; or \g.
     Your MariaDB connection id is 46
     Server version: 10.0.25-MariaDB-0ubuntu0.16.04.1 Ubuntu 16.04

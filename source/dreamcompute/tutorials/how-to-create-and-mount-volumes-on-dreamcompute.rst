@@ -63,13 +63,13 @@ Create and Attach a Volume via openstack CLI
 The first step is to make sure you have sufficient volume storage quota to add
 a new volume.  Run the following command to determine this:
 
-.. code:: bash
+.. code-block:: console
 
-    $ cinder quota-usage TENANTID
+    [user@localhost]$ cinder quota-usage TENANTID
 
 which will output a table like so:
 
-.. code:: bash
+.. code-block:: console
 
     +----------------------+--------+----------+-------+
     |         Type         | In_use | Reserved | Limit |
@@ -90,25 +90,25 @@ If you need additional storage, more can be added in the DreamHost
 
 To create the new volume, run this command:
 
-.. code:: bash
+.. code-block:: console
 
-    $ cinder create SIZE_IN_GB --display-name NAME --display-description "Description here"
+    [user@localhost]$ cinder create SIZE_IN_GB --display-name NAME --display-description "Description here"
 
 with optional extra parameters being display-name and display-description.
 
 The volume should now show up in the dashboard, and on the command line:
 
-.. code:: bash
+.. code-block:: console
 
-    $ cinder list
+    [user@localhost]$ cinder list
 
 To use your volume, it now needs to be attached to a running instance.  If you
 have no instances, please create one.  Using the CLI requires the instance
 name and the UUID of the volume.  Find the volume details by running:
 
-.. code:: bash
+.. code-block:: console
 
-    $ cinder --os-volume-api-version 2 list
+    [user@localhost]$ cinder --os-volume-api-version 2 list
     +--------------------------------------+-----------+------+------+-------------+----------+-------------+--------------------------------------+
     |                  ID                  |   Status  | Name | Size | Volume Type | Bootable | Multiattach |             Attached to              |
     +--------------------------------------+-----------+------+------+-------------+----------+-------------+--------------------------------------+
@@ -120,9 +120,9 @@ In this example the instance is called "mysql" and there is only one
 "available" volume, the one we created.  Once you have your values, you can
 attach the volume with:
 
-.. code:: bash
+.. code-block:: console
 
-    $ nova volume-attach mysql 8edfb18b-6b4b-424e-a172-cbded3aad148 auto
+    [user@localhost]$ nova volume-attach mysql 8edfb18b-6b4b-424e-a172-cbded3aad148 auto
     +----------+--------------------------------------+
     | Property | Value                                |
     +----------+--------------------------------------+
@@ -152,17 +152,17 @@ Now connect to your instance with the default username for your image.
 We first need to find the device name for our new volume.  You can see what
 devices are available by checking for /dev/vd* device files:
 
-.. code:: bash
+.. code-block:: console
 
-    $ ls /dev/vd*
+    [user@server]$ ls /dev/vd*
     /dev/vda  /dev/vda1  /dev/vdb
 
 Generally /dev/vda will be the boot drive, and in this case /dev/vdb appears
 to be the new volume.  You can double check the size matches with the command:
 
-.. code:: bash
+.. code-block:: console
 
-    $ sudo fdisk -l /dev/vdb
+    [user@server]$ sudo fdisk -l /dev/vdb
     Disk /dev/vdb: 1 GiB, 1073741824 bytes, 2097152 sectors
     Units: sectors of 1 * 512 = 512 bytes
     Sector size (logical/physical): 512 bytes / 512 bytes
@@ -176,9 +176,9 @@ system on the drive, run the mkfs command.
     This command is destructive!  If ran on the wrong device, it will erase
     it so please be sure you have it correct!
 
-.. code:: bash
+.. code-block:: console
 
-    $ sudo mkfs.ext4 /dev/vdb
+    [user@server]$ sudo mkfs.ext4 /dev/vdb
     mke2fs 1.42.13 (17-May-2015)
     Creating filesystem with 262144 4k blocks and 65536 inodes
     Filesystem UUID: 51751b87-a583-42b3-8d61-27ed586ba8da
@@ -200,36 +200,38 @@ changes happen, and such an error can prevent your instance from booting up
 properly.  To avoid this, we will boot via UUID.  You can find the drives UUID
 by running the blkid command:
 
-.. code:: bash
+.. code-block:: console
 
-    $ sudo blkid /dev/vdb
+    [user@server]$ sudo blkid /dev/vdb
     /dev/vdb: UUID="51751b87-a583-42b3-8d61-27ed586ba8da" TYPE="ext4"
 
 If you wish to mount this volume in a location that doesn't exist, go ahead and
 create the directory with mkdir:
 
-$ sudo mkdir -p /mnt/backups
+.. code-block:: console
+
+    [user@server]$ sudo mkdir -p /mnt/backups
 
 With this info we can now modify /etc/fstab to have it auto mounted.  Edit it
 with your preferred editor, which in this example will be vim, and add a line
 towards the bottom like so:
 
-.. code:: bash
+.. code::
 
     UUID=51751b87-a583-42b3-8d61-27ed586ba8da   /mnt/backups   ext4   defaults   0   2
 
 Once that is added, you can test your setup with:
 
-.. code:: bash
+.. code-block:: console
 
-    $ sudo mount -a
+    [user@server]$ sudo mount -a
 
 If all succeeded, you should see no output or only output about the file
 system.  You can check that all is well with "df":
 
-.. code:: bash
+.. code-block:: console
 
-    $ df -h /mnt/backups
+    [user@server]$ df -h /mnt/backups
     Filesystem      Size  Used Avail Use% Mounted on
     /dev/vdb        976M  1.3M  908M   1% /mnt/backups
 

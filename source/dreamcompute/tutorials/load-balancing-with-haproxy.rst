@@ -8,7 +8,6 @@ Introduction
 Load balancers are designed to host multiple applications behind the
 same IP address to save cost and to allow applications to horizontally
 scale out instances running on multiple virtual machines.
-
 One of the most popular open source load balancers is
 `HAProxy <http://www.haproxy.org/>`_. It is well supported,
 featureful, high performing, and widely available.
@@ -73,18 +72,18 @@ operating system is up to date with the latest security fixes and
 packages available from Ubuntu. While logged in as ubuntu, simply
 run:
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get upgrade
+    [user@server]$ sudo apt-get upgrade
 
 Follow the prompts, and allow apt to update your system.
 
 Installing HAProxy
 ------------------
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get install haproxy
+    [user@server]$ sudo apt-get install haproxy
 
 Configure HAProxy
 ~~~~~~~~~~~~~~~~~
@@ -173,9 +172,9 @@ To support this deployment, edit your /etc/haproxy/haproxy.cfg:
 Next, you'll need to activate HAProxy by setting ENABLED to 1 in
 /etc/default/haproxy. Finally, you can run HAProxy:
 
-.. code::
+.. code-block:: console
 
-    sudo service haproxy restart
+    [user@server]$ sudo service haproxy restart
 
 Assuming that you have configured your DNS to point app1.domain.io and
 app2.domain.io to your public IP address, you should be able to

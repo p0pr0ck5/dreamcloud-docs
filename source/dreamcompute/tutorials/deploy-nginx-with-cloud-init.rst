@@ -20,7 +20,7 @@ security group, then click the "Post Creation" Button on the far right of the
 Cloud-Init or just input the contents of the file into the web UI. Copy and
 paste the text below into the text box.
 
-.. code::
+.. code-block:: bash
 
     #! /bin/bash
     apt-get install nginx -y
@@ -41,7 +41,7 @@ execute at creation using the nova commandline client. First you need a file to
 with the script that you want to run, we'll call it cloud-init.sh. We want
 Cloud-Init to install NGINX, so the contents of cloud-init.sh should be:
 
-.. code::
+.. code-block:: bash
 
     #! /bin/bash
     apt-get install nginx -y
@@ -53,9 +53,10 @@ Cloud-Init to install NGINX, so the contents of cloud-init.sh should be:
 
 The command to create an instance that runs cloud-init.sh at creation is:
 
-.. code::
+.. code-block:: console
 
-    # nova boot --image Ubuntu-14.04 --flavor 100 --user-data cloud-init.sh
+    [root@localhost]# nova boot --image Ubuntu-14.04 --flavor 100 --user-data \
+        cloud-init.sh
 
 Visit `How to launch a virtual server on DreamCompute`_ for more information
 on how to launch an instance from the command line
@@ -68,7 +69,7 @@ needs to be changed is the script that Cloud-Init runs to install NGINX.
 For example if you wanted to deploy NGINX on CentOS, your file would look
 something like:
 
-.. code::
+.. code-block:: bash
 
     #! /bin/bash
     yum -y install nginx

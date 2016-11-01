@@ -15,32 +15,32 @@ Installing ModSecurity
 
 Ensure that the system package sources are up to date:
 
-.. code::
+.. code-block:: console
 
-    # apt-get update
+    [root@server]# apt-get update
 
 Next, install ModSecurity:
 
-.. code::
+.. code-block:: console
 
-    # apt-get install libapache2-mod-security2
+    [root@server]# apt-get install libapache2-mod-security2
 
 This automatically installs and activates ModSecurity. In order to begin using
 ModSecurity, a usable configuration file must be put into place. The ModSecurity
 package provided for Ubuntu contains a default recommended config file that can
 be used as a starting point:
 
-.. code::
+.. code-block:: console
 
-    # mv /etc/modsecurity/modsecurity.conf-recommended \
+    [root@server]# mv /etc/modsecurity/modsecurity.conf-recommended \
         /etc/modsecurity/modsecurity.conf
 
 Once this is in place, reload Apache for the default ModSecurity config file to
 take effect:
 
-.. code::
+.. code-block:: console
 
-    # service apache2 reload
+    [root@server]# service apache2 reload
 
 Configuring ModSecurity
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,18 +57,15 @@ The Ubuntu package for ModSecurity recommends a separate package containing the
 CRS rulesets, which can be used as an extra source of rules for WAF.
 Navigate to the directory containing these rules:
 
-.. code::
+.. code-block:: console
 
-    # cd /usr/shared/modsecurity-crs
-    /usr/share/modsecurity-crs# ls
-        activated_rules  base_rules  experimental_rules  lua
-        modsecurity_crs_10_setup.conf  optional_rules  slr_rules  util
+    [root@server]# cd /usr/shared/modsecurity-crs
 
 Configure ModSecurity to read rule files from the `activated_rules` directory.
 Add the following directives to the
 `/etc/apache2/mods-enabled/security2.conf` file:
 
-.. code::
+.. code-block:: apacheconf
 
     IncludeOptional "/usr/share/modsecurity-crs/*.conf"
     IncludeOptional "/usr/share/modsecurity-crs/activated_rules/*.conf"
@@ -81,10 +78,10 @@ Once this is done, link the desired rulesets into the newly included locations.
 For example, to add rules designed to protect against SQL injection
 attacks, link in the `sql_injection_attacks` file:
 
-.. code::
+.. code-block:: console
 
-    # cd /usr/share/modsecurity-crs/
-    # ln -s ./base_rules/modsecurity_crs_41_sql_injection_attacks.conf \
+    [root@server]# cd /usr/share/modsecurity-crs/
+    [root@server]# ln -s ./base_rules/modsecurity_crs_41_sql_injection_attacks.conf \
         ./activated_rules/
 
 Of course, it's possible to link only certain rulesets, or entire groups,
@@ -98,9 +95,9 @@ threats).
 Any time the ModSecurity configuration is adjusted, Apache must be reloaded
 in order for the rules to take effect:
 
-.. code::
+.. code-block:: console
 
-    # service apache2 reload
+    [root@server]# service apache2 reload
 
 Activating ModSecurity
 ----------------------
@@ -122,9 +119,9 @@ And set its value to `On`:
 
 And of course, reload Apache to effect the changes:
 
-.. code::
+.. code-block:: console
 
-    service apache2 restart
+    [root@server]# service apache2 restart
 
 Further Configuration
 ~~~~~~~~~~~~~~~~~~~~~

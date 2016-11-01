@@ -17,9 +17,9 @@ Start by setting the environment variables that tell Shade how to authenticate
 to Dreamcompute, do this by running the following and typing in your password
 when it asks for it:
 
-.. code:: bash
+.. code-block:: console
 
-    source openrc.sh
+    [user@localhost]$ source openrc.sh
 
 Getting a server ID and server API key from ServerPilot
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,6 +29,7 @@ key from ServerPilot. You also set the name of the server you want to create
 here.
 
 .. literalinclude:: examples/serverpilot.py
+    :language: python
     :start-after: step-1
     :end-before: step-2
 
@@ -36,6 +37,7 @@ Next you make the request to the ServerPilot API to create new a new server ID
 and API key.
 
 .. literalinclude:: examples/serverpilot.py
+    :language: python
     :start-after: step-2
     :end-before: step-3
 
@@ -50,6 +52,7 @@ Pass the ServerPilot installer as a task to be executed as soon as the
 new server is created, using cloud-init:
 
 .. literalinclude:: examples/serverpilot.py
+    :language: python
     :start-after: step-3
     :end-before: step-4
 
@@ -57,6 +60,7 @@ Then set variables for the image, flavor, and key pair to launch the server
 with.
 
 .. literalinclude:: examples/serverpilot.py
+    :language: python
     :start-after: step-4
     :end-before: step-5
 
@@ -70,6 +74,7 @@ server. For more information about Shade, read our documentation on `how
 to use Shade with DreamCompute <214836997>`__.
 
 .. literalinclude:: examples/serverpilot.py
+    :language: python
     :start-after: step-5
 
 Once the script runs and finishes, go to `ServerPilot.io
@@ -82,6 +87,7 @@ Full script
 ~~~~~~~~~~~
 
 .. literalinclude:: examples/serverpilot.py
+    :language: python
 
 .. meta::
     :labels: serverpilot cloud-init python shade

@@ -23,9 +23,9 @@ The fastest method is to simply tell Ubuntu to install the "task" named
 lamp-server.  This is accomplished with apt-get and making sure to use a caret
 (^) at the end of the name of the task.
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get install lamp-server^
+    [user@server]$ sudo apt-get install lamp-server^
 
 The install process asks you to confirm if you wish to install all packages
 needed for this task.  Confirm by entering "**y**" and hitting enter.
@@ -52,9 +52,9 @@ for details on each of these installed packages.
 Troubleshooting: If you get a huge amount of 404 File not found errors during
 this process, run the following:
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get update
+    [user@server]$ sudo apt-get update
 
 Then rerun these instructions from the top
 
@@ -64,9 +64,10 @@ Manual Installation
 To manually install all the needed packages, you can run the following
 command:
 
-.. code::
+.. code-block:: console
 
-    sudo apt-get install apache2 mysql-server php5-cli libapache2-mod-php5 php5-mysqlnd
+    [user@server]$ sudo apt-get install apache2 mysql-server php5-cli \
+        libapache2-mod-php5 php5-mysqlnd
 
 During this process, the mysql-server installation will ask you to enter and
 confirm a root password for MySQL.  It is recommended to provide one.  When

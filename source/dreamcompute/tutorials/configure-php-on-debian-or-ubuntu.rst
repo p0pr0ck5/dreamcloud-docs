@@ -24,9 +24,9 @@ This will install the /usr/bin/php binary and php.ini file.  This is normally
 used for running scripts in SSH and for cron jobs, or for development, but
 isn't directly usable for websites on apache.
 
-.. code::
+.. code-block:: console
 
-    apt-get install php5-cli
+    [root@server]# apt-get install php5-cli
 
 The install process asks you to confirm if you wish to install any additional
 packages needed for this installation of PHP.  Confirm by entering "**y**"
@@ -52,9 +52,9 @@ This will install the /usr/bin/php binary and php.ini file, as well as the
 apache module located at /usr/lib/apache2/modules/libphp5.so and its own
 php.ini file.
 
-.. code::
+.. code-block:: console
 
-    apt-get install libapache2-mod-php5
+    [root@server]# apt-get install libapache2-mod-php5
 
 The install process asks you to confirm if you wish to install any additional
 packages needed for this installation of PHP.  Confirm by entering "**y**"
@@ -77,17 +77,17 @@ The install process will enable the php5 module for you, and restart apache.
 If you wish to double check that it is enabled, you can use the a2enmod
 program:
 
-.. code::
+.. code-block:: console
 
-    # a2enmod php5
+    [root@server]# a2enmod php5
     Module php5 already enabled
 
 If you do disable or enable modules, make sure to restart apache with the
 service command:
 
-.. code::
+.. code-block:: console
 
-    # service apache2 restart
+    [root@server]# service apache2 restart
     [ ok ] Restarting web server: apache2 ... waiting .
 
 PHP Modules for Databases

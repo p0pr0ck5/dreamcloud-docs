@@ -71,14 +71,14 @@ instead of SSH keys, however you can do it either way you prefer.  To setup
 the instances for password authentication, turn it on with the below
 commands.
 
-.. code:: bash
+.. code-block:: console
 
     <login to each instance>
-    sudo su -
-    sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-    sed -i -e 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-    service ssh restart
-    passwd root
+    [user@server]$ sudo su -
+    [root@server]# sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    [root@server]# sed -i -e 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+    [root@server]# service ssh restart
+    [root@server]# passwd root
     <set a password>
 
 3.  Create a matching volume in the destination cluster, that is the same size
@@ -92,10 +92,10 @@ destination cluster.  There is no need to mount them.
 /dev/vda will be the boot drive of your instance, so it will be /dev/vdb or
 /dev/vdc.  You can check for it with a couple commands:
 
-.. code:: bash
+.. code-block:: console
 
-    fdisk -l /dev/vdb | grep Disk
-    fdisk -l /dev/vdc | grep Disk
+    [root@server]# fdisk -l /dev/vdb | grep Disk
+    [root@server]# fdisk -l /dev/vdc | grep Disk
 
 The one that matches the size of the volume is the one to use.  They may have
 different drive letters on each instance, so take note of that.
@@ -106,9 +106,9 @@ Replace IPV6-OF-SOURCE-INSTANCE with the IPv6 address of the source instance
 and the first /dev/vdX with the drive letter of the source volume, and the
 second /dev/vdX with the drive letter of the destination volume.
 
-.. code:: bash
+.. code-block:: console
 
-    ssh root@IPV6-OF-SOURCE-INSTANCE "dd if=/dev/vdX | gzip -1 -" | dd of=/dev/vdX
+    [root@destserver]# ssh root@IPV6-OF-SOURCE-INSTANCE "dd if=/dev/vdX | gzip -1 -" | dd of=/dev/vdX
 
 7.  Detach the destination volume from the instance, and check that it has the
 data you want by trying to boot it or attach it to another instance.  If all

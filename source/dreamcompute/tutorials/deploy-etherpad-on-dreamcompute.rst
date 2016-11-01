@@ -30,19 +30,20 @@ Installing dependencies
 Once you have your server up and running the next step is to install all of
 Etherpad's dependencies:
 
-.. code:: bash
+.. code-block:: console
 
-    apt-get install gzip git curl python libssl-dev pkg-config build-essential
-    apt-get install nodejs npm
+    [root@server]# apt-get install gzip git curl python libssl-dev pkg-config \
+        build-essential
+    [root@server]# apt-get install nodejs npm
 
 Next you must symlink /usr/bin/nodejs to /usr/bin/node because Etherpad will
 try to use that path. Most Linux distributions install nodejs in /usr/bin/node.
 This step is only necessary on Ubuntu servers since it doesn't install nodejs
 in /usr/bin/node because of another package.
 
-.. code:: bash
+.. code-block:: console
 
-    ln -s /usr/bin/nodejs /usr/bin/node
+    [root@server]# ln -s /usr/bin/nodejs /usr/bin/node
 
 Installing Etherpad
 ~~~~~~~~~~~~~~~~~~~
@@ -50,9 +51,9 @@ Installing Etherpad
 Now that all the dependencies are installed the next step is to download
 Etherpad and run it. To clone Etherpad using git, run:
 
-.. code:: bash
+.. code-block:: console
 
-    git clone git://github.com/ether/etherpad-lite.git /srv/etherpad-lite
+    [root@server]# git clone git://github.com/ether/etherpad-lite.git /srv/etherpad-lite
 
 Configuration
 -------------
@@ -63,13 +64,13 @@ Networking
 Now comes the configuration of Etherpad. By default it runs on port 9001.
 Change it to run on port 8080 by editing /srv/etherpad-lite/settings.json:
 
-.. code:: bash
+.. code-block:: json
 
     "port" : 9001,
 
 should be changed to:
 
-.. code:: bash
+.. code-block:: json
 
     "port" : 8080,
 
@@ -90,15 +91,15 @@ databases such as PostgreSQL and SQLite.
 If you don't have MySQL running, follow `this <215879487>`__. Once you have
 that running, connect to MySQL and create a database for Etherpad to use:
 
-.. code:: bash
+.. code-block:: console
 
-    $ mysql -u root -p
+    [root@server]# mysql -u root -p
     Enter password:
     mysql> CREATE DATABASE etherpad
 
 Finally edit settings.json and delete the configuration for dirtyDB:
 
-.. code:: bash
+.. code-block:: json
 
     "dbSettings" : {
                    "filename" : "var/dirty.db"
@@ -106,7 +107,7 @@ Finally edit settings.json and delete the configuration for dirtyDB:
 
 And add the configuration for MySQL:
 
-.. code:: bash
+.. code-block:: json
 
     "dbType" : "mysql",
     "dbSettings" : {
@@ -144,26 +145,26 @@ user for it to run as. To create a systemd service copy the following into
 
 Next we need to create the user for etherpad-lite to run as.
 
-.. code:: bash
+.. code-block:: console
 
-    adduser --system --home=/srv/etherpad-lite --group etherpad-lite
+    [root@server]# adduser --system --home=/srv/etherpad-lite --group etherpad-lite
 
 Now there is an ``etherpad-lite`` user, change the permissions of
 /srv/etherpad-lite so that it has access to the directory.
 
-.. code:: bash
+.. code-block:: console
 
-    chown -R etherpad-lite:etherpad-lite /srv/etherpad-lite
+    [root@server]# chown -R etherpad-lite:etherpad-lite /srv/etherpad-lite
 
 Starting Etherpad
 ~~~~~~~~~~~~~~~~~
 
 Finally start the service and set it to start at boot
 
-.. code:: bash
+.. code-block:: console
 
-    systemctl enable etherpad-lite
-    systemctl start etherpad-lite
+    [root@server]# systemctl enable etherpad-lite
+    [root@server]# systemctl start etherpad-lite
 
 Etherpad is now running. Confirm it works by going to http://IP:8080. Make
 sure to replace "IP" with the IP address of your server.

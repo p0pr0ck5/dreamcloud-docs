@@ -15,9 +15,9 @@ Installing Apache
 
 To install Apache on your system, run the following command:
 
-.. code:: bash
+.. code-block:: console
 
-    yum install httpd
+    [root@server]# yum install httpd
 
 * The install process asks you to confirm if you wish to install any
   dependency packages needed for Apache.
@@ -25,9 +25,9 @@ To install Apache on your system, run the following command:
 
 In order to start Apache run
 
-.. code:: bash
+.. code-block:: console
 
-    service httpd start
+    [root@server]# service httpd start
 
 This may display an error about the lack of a configuration, but it
 will start anyways.
@@ -41,9 +41,9 @@ will start anyways.
 You likely want apache to start on boot, and this can be configured
 with:
 
-.. code:: bash
+.. code-block:: console
 
-    chkconfig httpd on
+    [root@server]# chkconfig httpd on
 
 If you visit the public IP in your browser for your DreamCompute
 instance, you are able to see the 'getting started' page.  You can
@@ -74,9 +74,9 @@ This directory contains all the configuration files for your Apache
 server, and symlinks to other parts of the Apache install such as the
 logs and modules directories.
 
-.. code:: bash
+.. code-block:: console
 
-    [root@fedora20 ~]# ls /etc/httpd
+    [root@server]# ls /etc/httpd
     conf  conf.d  conf.modules.d  logs  modules  run
 
 conf
@@ -141,7 +141,7 @@ wrong, or redirect them to another site.
   but you can view a basic one listening on port 80 (http) with custom
   logging here:
 
-.. code::
+.. code-block:: apacheconf
 
     <VirtualHost *:80>
     ServerName example.com
@@ -156,7 +156,7 @@ Alternatively, if you wish to specify the ip instead of "**\***" you
 can use the following command replacing 1.1.1.1 with your real ip
 address:
 
-.. code::
+.. code-block:: apacheconf
 
     <VirtualHost 1.1.1.1:80>
 
@@ -172,7 +172,7 @@ the command:
 
 .. code:: bash
 
-    service httpd reload
+    [root@server]# service httpd reload
 
 .. meta::
     :labels: apache fedora centos linux

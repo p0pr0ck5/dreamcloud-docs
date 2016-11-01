@@ -15,18 +15,18 @@ Installing Apache
 
 To install Apache on your system, run the following commands:
 
-.. code:: bash
+.. code-block:: console
 
-    $ sudo apt-get update
-    $ sudo apt-get install apache2
+    [user@server]$ sudo apt-get update
+    [user@server]$ sudo apt-get install apache2
 
 * The install process asks you to confirm if you wish to install any
   additional packages needed for this instance of Apache.
 * Enter "**y**" and hit enter to confirm.
 
-.. code::
+.. code-block:: console
 
-    # apt-get install apache2
+    [user@server]$ sudo apt-get install apache2
     Reading package lists... Done
     Building dependency tree
     Reading state information... Done
@@ -115,9 +115,9 @@ values of interest in here are:
 To check which MPM configuration (and modules) exist, run the
 following:
 
-.. code:: bash
+.. code-block:: console
 
-    sudo apache2 -l
+    [user@server]$ sudo apache2 -l
 
 *The enabled modules are listed, ending with .c . In this case, the
 worker module is enabled:*
@@ -161,7 +161,7 @@ when it receives a request.
   but you can view a basic one for listening on port 80 (http) with
   custom logging here:
 
-.. code::
+.. code-block:: apacheconf
 
     <VirtualHost *:80>
     ServerName example.com
@@ -176,7 +176,7 @@ when it receives a request.
   can use the following command replacing 1.1.1.1 with your real ip
   address:
 
-.. code::
+.. code-block:: apacheconf
 
     <VirtualHost 1.1.1.1:80>
 
@@ -204,20 +204,20 @@ Modules
 
 Modules can be enabled or disabled by the following commands:
 
-.. code:: bash
+.. code-block:: console
 
-    sudo a2enmod
+    [user@server]$ sudo a2enmod
 
-    sudo a2dismod
+    [user@server]$ sudo a2dismod
 
 * When you run the command, it displays a list of modules available to
   enable or disable.
 * After you enable or disable a site, reload Apache to make the change
   live by using the following command:
 
-    .. code:: bash
+    .. code-block:: console
 
-        service apache2 reload
+        [user@server]$ service apache2 reload
 
 .. meta::
     :labels: apache ubuntu debian linux

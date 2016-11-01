@@ -92,7 +92,7 @@ By default Hastebin uses redis to store its data, we're going to use a simpler
 solution, flat files.
 Edit config.js and delete the configuration for redis:
 
-.. code:: js
+.. code-block:: javascript
 
     "storage": {
       "type": "redis",
@@ -104,7 +104,7 @@ Edit config.js and delete the configuration for redis:
 
 and replace it with the configuration for using flat files:
 
-.. code:: js
+.. code-block:: javascript
 
     "storage": {
       "type": "file",

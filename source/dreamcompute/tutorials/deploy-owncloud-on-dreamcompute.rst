@@ -25,23 +25,24 @@ Installing MariaDB
 In order to install MariaDB on your database server, first login to the server
 with:
 
-.. code::
+.. code-block:: console
 
-    ssh user@$IP
+    [user@localhost]$ ssh user@$IP
 
 changing the IP to your server's public IP address. Then run
 
-.. code::
+.. code-block:: console
 
-    sudo su -
+    [user@localhost]$ sudo su -
+    [root@server]#
 
 this creates a root shell, which you will need because you have to have
 administrator rights to install things system-wide. Now that you have a root
 shell you can install mariadb by running:
 
-.. code::
+.. code-block:: console
 
-    apt-get install mariadb-server
+    [root@server]# apt-get install mariadb-server
 
 It will ask for a root password for the Database, enter whatever you want and
 remember it, you will need it later.
@@ -81,13 +82,13 @@ Now our database will listen to connections from other servers, but we have
 to allow root to login from another IP address. We do this by logging into the
 DB as root with
 
-.. code::
+.. code-block:: console
 
-    mysql -u root -p
+    [root@server]# mysql -u root -p
 
 then enter the root password for your database. Then run:
 
-.. code::
+.. code-block:: sql
 
     use mysql;
     update user set host='$IP' where user='root' and host='$HOSTNAME';
@@ -104,9 +105,9 @@ is the hostname of your database server.
 
 now restart the mariadb service so the new configs are loaded by running:
 
-.. code::
+.. code-block:: console
 
-    service mysql restart
+    [root@server]# service mysql restart
 
 Installing the ownCloud application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -118,17 +119,18 @@ Now that we have a database that ownCloud can use, we need to deploy the
 frontend application. First login to the server that you will be
 installing ownCloud on. Create a root shell again by running
 
-.. code::
+.. code-block:: console
 
-    sudo su -
+    [user@localhost]$ sudo su -
+    [root@server]#
 
 Then run
 
-.. code::
+.. code-block:: console
 
-    apt-get install apache2 libapache2-mod-php5
-    apt-get install php5-gd php5-json php5-mysql php5-curl
-    apt-get install php5-intl php5-mcrypt php5-imagick
+    [root@server]# apt-get install apache2 libapache2-mod-php5
+    [root@server]# apt-get install php5-gd php5-json php5-mysql php5-curl
+    [root@server]# apt-get install php5-intl php5-mcrypt php5-imagick
 
 to install the packages that ownCloud requires to run.
 
@@ -139,17 +141,17 @@ Now we need to download the actual ownCloud application. Do this by going to
 https://owncloud.org/install/#instructions-server in a browser and right click
 the *.tar.bz2* link and click *copy link location* then in your root shell run
 
-.. code::
+.. code-block:: console
 
-    wget $URL
+    [root@server]# wget $URL
 
 where **$URL** is the URL you just copied. This will download a compressed
 copy of the ownCloud application. Decompress the file by running
 
-.. code::
+.. code-block:: console
 
-    bzip2 -d owncloud-9.0.0.tar.bz2
-    tar -xvf owncloud-9.0.0.tar
+    [root@server]# bzip2 -d owncloud-9.0.0.tar.bz2
+    [root@server]# tar -xvf owncloud-9.0.0.tar
 
 owncloud-9.0.0.tar.bz2 is the name of the file you just downloaded and
 owncloud-9.0.0.tar is the directory created by running the bzip2 command. The
@@ -162,16 +164,16 @@ Setting up the owncloud directory
 First we need to copy ownCloud to the right directory. We will be running it
 out of /var/www/owncloud. To copy it run
 
-.. code::
+.. code-block:: console
 
-    cp -R owncloud /var/www/
+    [root@server]# cp -R owncloud /var/www/
 
 Now we want to change the permissions of the owncloud directory so that the web
 user, www-data in our case, can access it. Do this by running
 
-.. code::
+.. code-block:: console
 
-    chown -R www-data:www-data /var/www/owncloud
+    [root@server]# chown -R www-data:www-data /var/www/owncloud
 
 Configuring Apache
 ------------------
@@ -180,7 +182,7 @@ Now that we have ownCloud in the right place, we need to configure Apache to
 use it. To do this we must create a file in /etc/apache2/sites-available called
 "owncloud.conf" and make it's contents
 
-.. code::
+.. code-block:: apacheconf
 
     Alias /owncloud "/var/www/owncloud/"
 
@@ -200,27 +202,27 @@ use it. To do this we must create a file in /etc/apache2/sites-available called
 Then symlink /etc/apache2/sites-enabled/owncloud.conf to
 /etc/apache2/sites-available/owncloud.conf by running
 
-.. code::
+.. code-block:: console
 
-    ln -s /etc/apache2/sites-available/owncloud.conf \
-    /etc/apache2/sites-enabled/owncloud.conf
+    [root@server]# ln -s /etc/apache2/sites-available/owncloud.conf \
+        /etc/apache2/sites-enabled/owncloud.conf
 
 ownCloud also needs certain apache modules to run properly, enable them by
 running
 
-.. code::
+.. code-block:: console
 
-    a2enmod rewrite
+    [root@server]# a2enmod rewrite
 
 You should also use SSL with ownCloud to protect login information and data,
 Apache installed on Ubuntu comes with a self-signed cert. To enable SSL using
 that cert run
 
-.. code::
+.. code-block:: console
 
-    a2enmod ssl
-    a2ensite default-ssl
-    service apache2 restart
+    [root@server]# a2enmod ssl
+    [root@server]# a2ensite default-ssl
+    [root@server]# service apache2 restart
 
 Finishing the Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
