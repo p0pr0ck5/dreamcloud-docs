@@ -77,7 +77,7 @@ connect with DreamObjects.
 The script below sets the Cache-Control header to a max-age of 2592000 seconds
 (30 days) for all JPG and PNG files in the bucket you specify:
 
-.. code::
+.. code-block:: python
 
     from boto.s3.connection import S3Connection
 

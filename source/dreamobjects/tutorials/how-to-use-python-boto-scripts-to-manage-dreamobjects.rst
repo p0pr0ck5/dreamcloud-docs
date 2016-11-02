@@ -25,7 +25,7 @@ DreamObjects service.
 Checking the size of a bucket
 -----------------------------
 
-.. code:: python
+.. code-block:: python
 
     #!/usr/bin/python
     # -*- coding: utf-8 -*-
@@ -51,7 +51,7 @@ Purging a directory from a bucket
                data from a bucket, in the case you wish to remove a bucket
                that contains data.
 
-.. code:: python
+.. code-block:: python
 
     #!/usr/bin/python
     import boto
@@ -74,7 +74,7 @@ This script changes all permissions in a bucket to either private (private) or
 public (public-read).  Uncomment one of the last two lines for the specific
 permission you wish to use.
 
-.. code:: python
+.. code-block:: python
 
     #!/usr/bin/python
     import boto
@@ -101,7 +101,7 @@ boto script below.
                "pip install boto" commands.  If not on a DreamHost server and
                you have root access, using a virtualenv is optional.
 
-.. code:: python
+.. code-block:: python
 
     #!/usr/bin/python
     import math, os

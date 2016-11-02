@@ -25,9 +25,9 @@ For Windows there are files in .msi format that can be installed directly.
 For Mac and Linux, the suggested installation is through python "pip".  To do
 this, run the following command on your local computer:
 
-.. code::
+.. code-block:: console
 
-    $ pip install awscli
+    [user@localhost]$ pip install awscli
 
 To install the client on a DreamHost shared, VPS or dedicated server will
 require the use of python virtualenv and then using its "pip" to install the
@@ -48,19 +48,19 @@ things:
    will ensure compatibility.  You can check and change this value with these
    commands.
 
-.. code::
+.. code-block:: console
 
-    $ aws configure get default.s3.signature_version
+    [user@localhost]$ aws configure get default.s3.signature_version
     s3v4
-    $ aws configure set default.s3.signature_version ""
+    [user@localhost]$ aws configure set default.s3.signature_version ""
 
 2. Run the following command to input your access and secret keys for AWS CLI
    to store them encrypted for you.  Accept the default region and output
    format by hitting enter.
 
-.. code::
+.. code-block:: console
 
-    $ aws configure
+    [user@localhost]$ aws configure
     AWS Access Key ID [None]:
     AWS Secret Access Key [None]:
     Default region name [None]:
@@ -71,51 +71,51 @@ Example Commands
 
 **Making a bucket**
 
-.. code::
+.. code-block:: console
 
-    $ aws --endpoint-url https://objects-us-west-1.dream.io s3 mb s3://newbucketname
+    [user@localhost]$ aws --endpoint-url https://objects-us-west-1.dream.io s3 mb s3://newbucketname
     make_bucket: s3://newbucketname/
 
 **Listing all buckets**
 
-.. code::
+.. code-block:: console
 
-    $ aws --endpoint-url https://objects-us-west-1.dream.io s3 ls
+    [user@localhost]$ aws --endpoint-url https://objects-us-west-1.dream.io s3 ls
     2016-01-27 20:14:46 newbucketname
 
 **Uploading a file into a bucket**
 
-.. code::
+.. code-block:: console
 
-    $ aws --endpoint-url https://objects-us-west-1.dream.io s3 cp testfile.txt s3://newbucketname/testfile.txt
+    [user@localhost]$ aws --endpoint-url https://objects-us-west-1.dream.io s3 cp testfile.txt s3://newbucketname/testfile.txt
     upload: ./testfile.txt to s3://newbucketname/testfile.txt
 
 **Listing the contents of a bucket**
 
-.. code::
+.. code-block:: console
 
-    $ aws --endpoint-url https://objects-us-west-1.dream.io s3 ls s3://newbucketname
+    [user@localhost]$ aws --endpoint-url https://objects-us-west-1.dream.io s3 ls s3://newbucketname
     2016-01-27 19:30:21       8803 testfile.txt
 
 **Downloading a file from a bucket**
 
-.. code::
+.. code-block:: console
 
-    $ aws --endpoint-url https://objects-us-west-1.dream.io s3 cp s3://newbucketname/testfile.txt testfile.txt
+    [user@localhost]$ aws --endpoint-url https://objects-us-west-1.dream.io s3 cp s3://newbucketname/testfile.txt testfile.txt
     download: s3://newbucketname/testfile.txt to ./testfile.txt
 
 **Deleting a file in a bucket**
 
-.. code::
+.. code-block:: console
 
-    $ aws --endpoint-url https://objects-us-west-1.dream.io s3 rm s3://newbucketname/testfile.txt
+    [user@localhost]$ aws --endpoint-url https://objects-us-west-1.dream.io s3 rm s3://newbucketname/testfile.txt
     delete: s3://newbucketname/testfile.txt
 
 **Deleting an empty bucket**
 
-.. code::
+.. code-block:: console
 
-    $ aws --endpoint-url https://objects-us-west-1.dream.io s3 rb s3://newbucketname/
+    [user@localhost]$ aws --endpoint-url https://objects-us-west-1.dream.io s3 rb s3://newbucketname/
     remove_bucket: s3://newbucketname/
 
 **Sync a directory and its files to or from a bucket**
@@ -125,9 +125,9 @@ can specify other params such as --delete to remove files from the destination
 that aren't on the source.  An additional useful flag is --acl which accepts
 values such as "private" or "public-read".
 
-.. code::
+.. code-block:: console
 
-    $ aws --endpoint-url https://objects-us-west-1.dream.io s3 sync syncdir s3://newbucketname/
+    [user@localhost]$ aws --endpoint-url https://objects-us-west-1.dream.io s3 sync syncdir s3://newbucketname/
     upload: syncdir/file3 to s3://newbucketname/file3
     upload: syncdir/file1 to s3://newbucketname/file1
     upload: syncdir/file2 to s3://newbucketname/file2
