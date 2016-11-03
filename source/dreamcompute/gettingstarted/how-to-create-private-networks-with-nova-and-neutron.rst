@@ -1,5 +1,5 @@
 ===============================================================
-How to create and manage private networks with nova and neutron
+How to create and manage private networks with Nova and Neutron
 ===============================================================
 
 Private networking is a useful feature that customers may wish to utilize
@@ -12,7 +12,7 @@ are covered.
 Private network options
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Once support has confirmed the network quota has been adjusted, the private
+Once Support has confirmed the network quota has been adjusted, the private
 network can be added.  Please review the below options to determine settings
 for the private network.
 
@@ -46,19 +46,20 @@ Adding the private network
 
 1. Create a network:
 
-    .. code:: console
+    .. code-block:: console
 
-        $ neutron net-create private-network
+        [user@localhost]$ neutron net-create private-network
 
 This command creates a new empty network which can accept a subnet
 later.  In this example the name "private-network" is given.
 
 2. Create a subnet:
 
-    .. code:: console
+    .. code-block:: console
 
-        $ neutron subnet-create private-network 10.0.0.0/24 --name private-network \
-          --dns-nameserver 8.8.8.8 --dns-nameserver 8.8.4.4 --disable-dhcp
+        [user@localhost]$ neutron subnet-create private-network 10.0.0.0/24 \
+                          --name private-network --dns-nameserver 8.8.8.8 \
+                          --dns-nameserver 8.8.4.4 --disable-dhcp
 
 This command creates a new subnet on top of the network created above.
 Depending on decisions made about `DHCP`_ and the
@@ -69,26 +70,26 @@ specified.
 
 3. Create a router:
 
-    .. code:: console
+    .. code-block:: console
 
-        $ neutron router-create private-router
+        [user@localhost]$ neutron router-create private-router
 
 This command creates a new router with a default configuration.  In this
 example the name "private-router" is given.
 
 4. Create a router interface:
 
-    .. code:: console
+    .. code-block:: console
 
-        $ neutron router-interface-add private-router private-network
+        [user@localhost]$ neutron router-interface-add private-router private-network
 
 This command adds an interface to the router to the private network.
 
 5. Set the router gateway:
 
-    .. code:: console
+    .. code-block:: console
 
-        $ neutron router-gateway-set private-router public
+        [user@localhost]$ neutron router-gateway-set private-router public
 
 This command sets the router gateway to the public network, to allow
 it access to the internet.
@@ -99,13 +100,13 @@ IP address.
 
 1. Determine flavor, security group, image, keypair, and network ID:
 
-    .. code:: console
+    .. code-block:: console
 
-        $ nova flavor-list
-        $ nova secgroup-list
-        $ nova image-list
-        $ nova keypair-list
-        $ neutron net-list
+        [user@localhost]$ nova flavor-list
+        [user@localhost]$ nova secgroup-list
+        [user@localhost]$ nova image-list
+        [user@localhost]$ nova keypair-list
+        [user@localhost]$ neutron net-list
 
 The above commands will output the available flavors, security groups,
 images, keypairs, and the networks available.  Select the necessary
@@ -114,10 +115,11 @@ needed in place of the given name.
 
 2. Create an instance:
 
-    .. code:: console
+    .. code-block:: console
 
-        $ nova boot --flavor gp1.semisonic --security-group default --image Ubuntu-16.04 \
-          --nic net-id=LONG-NETWORK-UUID-HERE --key-name KEYNAME INSTANCENAME
+        [user@localhost]$ nova boot --flavor gp1.semisonic --security-group default \
+                          --image Ubuntu-16.04 --nic net-id=LONG-NETWORK-UUID-HERE \
+                          --key-name KEYNAME INSTANCENAME
 
 The above command creates a semisonic size instance, using the default
 security group and the Ubuntu 16.04 operating system image.  The

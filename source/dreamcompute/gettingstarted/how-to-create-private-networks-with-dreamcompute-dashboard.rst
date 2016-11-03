@@ -1,6 +1,6 @@
-======================================================
-How to create and manage private networks with horizon
-======================================================
+=========================================================================
+How to create and manage private networks with the DreamCompute Dashboard
+=========================================================================
 
 Private networking is a useful feature that customers may wish to utilize
 for advanced cloud setups.  For a description of private networking and how to
@@ -12,7 +12,7 @@ are covered.
 Private network options
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Once support has confirmed the network quota has been adjusted, the private
+Once Support has confirmed the network quota has been adjusted, the private
 network can be added.  Please review the below options to determine settings
 for the private network.
 
