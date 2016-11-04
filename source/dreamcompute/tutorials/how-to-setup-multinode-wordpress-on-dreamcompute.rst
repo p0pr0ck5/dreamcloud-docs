@@ -184,6 +184,12 @@ Then, configure NFS to export that directory. Edit /etc/exports and add:
 where "/exports/www" is the directory to export and "10.10.10.0/24" is the range of IP
 addresses to allow to mount this directory.
 
+.. Note::
+
+    You may need to restart the NFS service for your configuration
+    changes to take effect. You can do this with ``sudo service
+    nfs-kernel-server restart``.
+
 Security groups
 ---------------
 

@@ -64,16 +64,13 @@ To do this, we make a folder for the website:
 
     [user@server]$ sudo mkdir /var/www/example.com
 
-And we create a user and give them access:
+Then give your user access to that directory. This is so that you can install
+the WordPress site, later you will change ownership of that directory to
+www-data so Apache can access it.
 
 .. code-block:: console
 
-    [user@server]$ sudo adduser wp_example
-    [user@server]$ sudo adduser wp_example www-data
-    [user@server]$ sudo chown -R wp_example:www-data /var/www/example.com/
-
-The reason we add the users to the www-data group is to allow Ubuntu to properly
-manage WordPress updates and images.
+    [user@server]$ sudo chown -R $USER /var/www/example.com/
 
 Add SSH Access
 ~~~~~~~~~~~~~~
@@ -214,12 +211,11 @@ That will make it accessible for all users.
 Install WordPress
 ~~~~~~~~~~~~~~~~~
 
-Log into your server as your WordPress SSH account (wp_example) and go to your
-webfolder. If you've installed WP-CLI, then all you have to do is this:
+If you've installed WP-CLI, then all you have to do is this:
 
 .. code-block:: console
 
-    [wp_example@server]$ wp core download
+    [user@server]$ wp core download
 
 If you go to http://example.com now you'll get that 5 minute install page.
 
@@ -227,13 +223,20 @@ Of course since you have wp-cli you can also do this:
 
 .. code-block:: console
 
-    [wp_example@server]$ wp core config --dbname=examplecom_wordpress --dbuser=examplecom --dbpass=PASSWORD
-    [wp_example@server]$ wp core install --url=http://example.com --title=DreamComputePress --admin_user=YOURUSERNAME --admin_password=PASSWORD --admin_email=admin@example.com --skip-email
+    [user@server]$ wp core config --dbname=examplecom_wordpress --dbuser=examplecom --dbpass=PASSWORD
+    [user@server]$ wp core install --url=http://example.com --title=DreamComputePress --admin_user=YOURUSERNAME --admin_password=PASSWORD --admin_email=admin@example.com --skip-email
 
 If you use secure passwords like cWG8j8FPPj{T9UDL_PW8 then you MUST put quotes
 around the password.
 
 I chose to skip-emails since I'm making it right there.
+
+Finally you must change ownership of the WordPress site to www-data and the
+group to www-data as well so that the Apache webserver can access the files:
+
+.. code-block:: console
+
+    [user@server]$ chown -R www-data:www-data /var/www/example.com
 
 Miscellaneous Stuff
 ~~~~~~~~~~~~~~~~~~~
@@ -260,13 +263,12 @@ Run a restart of apache when you're done:
 Troubleshooting
 ~~~~~~~~~~~~~~~
 
-If WordPress can't save files, you probably forgot to put your user in the right
-group:
+If WordPress can't save files, you probably forgot to change ownership of the
+WordPress site to www-data.
 
 .. code-block:: console
 
-    [user@server]$ sudo adduser wp_example www-data
-    [user@server]$ sudo chown -R wp_example:www-data /var/www/example.com/
+    [user@server]$ sudo chown -R www-data:www-data /var/www/example.com/
 
 If that still doesn't work, try this:
 
