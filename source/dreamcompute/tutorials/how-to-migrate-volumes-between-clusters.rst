@@ -108,7 +108,7 @@ second /dev/vdX with the drive letter of the destination volume.
 
 .. code-block:: console
 
-    [root@destserver]# ssh root@IPV6-OF-SOURCE-INSTANCE "dd if=/dev/vdX | gzip -1 -" | dd of=/dev/vdX
+    [root@destserver]# ssh root@IPV6-OF-SOURCE-INSTANCE "dd if=/dev/vdX | gzip -1 -" | gunzip - | dd of=/dev/vdX
 
 7.  Detach the destination volume from the instance, and check that it has the
 data you want by trying to boot it or attach it to another instance.  If all
