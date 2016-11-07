@@ -95,7 +95,7 @@ Using ``cron``, I have this scheduled like so:
 
 .. code::
 
-    30 0 * 0 * /usr/local/bin/update_certs
+    30 0 * * 0 /usr/local/bin/update_certs
 
 And now, my system attempts to renew all of my certificates once a week.
 If there are no certificates in danger of expiring soon, nothing bad
