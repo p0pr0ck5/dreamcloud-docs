@@ -31,8 +31,6 @@ needs to be saved on it, instead of using the volume as the root of your OS.
 - **Do not use up volume quota**: If you have more instance quota, you can
   always boot it from an ephemeral disk even if you don't have any volume
   quota left.
-- **Cannot be snapshotted**: This means you cannot duplicate an instance
-  easily and you also can't use snapshots to back your instance up.
 - **Are destroyed when the instance is terminated**: This means if you want to
   temporarily delete an instance to free up some instance quota, you can't
   without losing your data.
