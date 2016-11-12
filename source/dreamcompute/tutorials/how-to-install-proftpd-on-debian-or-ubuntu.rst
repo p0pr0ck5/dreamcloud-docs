@@ -24,10 +24,10 @@ server and associated programs.
 Package installation
 --------------------
 
-.. code:: bash
+.. code-block:: console
 
-    sudo apt-get update
-    sudo apt-get install proftpd
+    [user@server]# sudo apt-get update
+    [user@server]# sudo apt-get install proftpd
 
 During installation, some additional needed packages are included which require
 a confirmation.  Also, near the end of the installation a prompt is displayed
@@ -63,7 +63,7 @@ to make a whole new security group and include just those rules for FTP.  The
 security group can be added to the instance(s) that need it to allow those
 ports.
 
-Here is an example of what a security group looks like that is setup as a new
+Here is an example of what a security group looks like that is set up as a new
 security group just for FTP, and it is called "FTP".
 
 .. figure:: images/proftpd/dreamcompute-proftpd-security-group.png
@@ -77,22 +77,22 @@ Most FTP clients make use of passive FTP, which is a connection method that is
 more reliable when firewalls are involved.  Edit the /etc/proftpd/proftpd.conf
 file and find this line:
 
-.. code:: bash
+.. code-block:: apache
 
     # PassivePorts                  49152 65534
 
 Uncomment it by removing the "#" symbol, and update the "49152 65534" range
 to "60000 65535" or your desired range.  Afterwards it should look like:
 
-.. code:: bash
+.. code-block:: apache
 
     PassivePorts            60000 65535
 
 Save the file, and restart ProFTPD to apply this change.
 
-.. code:: bash
+.. code-block:: console
 
-    service proftpd restart
+    [user@server]$ sudo service proftpd restart
 
 Optional features and configurations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -107,14 +107,14 @@ Security improvements
 Edit the /etc/proftpd/proftpd.conf file and modify these existing commented-out
 lines or add them new:
 
-.. code:: bash
+.. code-block:: apache
 
     DefaultRoot ~
     ServerIdent on "FTP Server ready."
 
-The DefaultRoot entry ensures that users that login are confined to
-their home directories, and the ServerIdent entry doesn't disclose server type
-or versions to any users to avoid targeted attacks.
+The DefaultRoot entry ensures that users that log in are confined to
+their home directories, and the ServerIdent entry doesn't disclose
+server type or versions to any users to avoid targeted attacks.
 
 Private networking specific change
 ----------------------------------
@@ -124,7 +124,7 @@ server believes it is working on the private network IP address only.  This
 causes issues with passive FTP connections.  To fix this, edit
 /etc/proftpd/proftpd.conf and find this setting:
 
-.. code:: bash
+.. code-block:: apache
 
     # MasqueradeAddress             1.2.3.4
 
@@ -136,9 +136,9 @@ network.
 
 Save the file, and restart ProFTPD to apply this change.
 
-.. code:: bash
+.. code-block:: console
 
-    service proftpd restart
+    [user@server]# service proftpd restart
 
 Anonymous FTP
 -------------
@@ -153,13 +153,13 @@ in most setups.
 
 After uncommenting the code, restart ProFTPD to enable it.
 
-To test that it is working, use the basic ftp client to login with the
+To test that it is working, use the basic ftp client to log in with the
 "anonymous" username and an email address as the password.  Here is output
 from a working system:
 
-.. code:: bash
+.. code-block:: console
 
-    $ ftp localhost
+    [user@server]$ ftp localhost
     Connected to localhost.
     220 FTP Server ready.
     Name (localhost:debian): anonymous
@@ -187,20 +187,20 @@ The first step is to enable the TLS configuration file.  Edit the
 /etc/proftpd/proftpd.conf file, and uncomment the line related to tls.conf.  It
 looks like so:
 
-.. code:: bash
+.. code-block:: apache
 
     #Include /etc/proftpd/tls.conf
 
 Once the "#" is removed, save the file.
 
 Next, determine if a self-signed certificate is needed or if an existing
-certificate is available to use.  If the instance has a HTTP server and is
-using Let's Encrypt, that certificate can be used.  To use that certificate,
-find where it is stored (generally /etc/letsencrypt/live/YOURDOMAIN/) and
-edit the /etc/proftpd/tls.conf file by uncommenting and modifying the options
-to look like so:
+certificate is available to use.  If the instance has an HTTP server and is
+`using Let's Encrypt <222168828>`_, that certificate can be used.  To
+use that certificate, find where it is stored (generally
+/etc/letsencrypt/live/YOURDOMAIN/) and edit the /etc/proftpd/tls.conf
+file by uncommenting and modifying the options to look like so:
 
-.. code:: bash
+.. code-block:: apache
 
     TLSRSACertificateFile         /etc/letsencrypt/live/YOURDOMAIN/cert.pem
     TLSRSACertificateKeyFile      /etc/letsencrypt/live/YOURDOMAIN/privkey.pem
@@ -209,17 +209,16 @@ to look like so:
 If there is not a certificate available, a self-signed one can be created by
 running the following command (as recommended in the proftpd.conf file):
 
-.. code:: bash
+.. code-block:: console
 
-    sudo openssl req -x509 -newkey rsa:1024 -keyout /etc/ssl/private/proftpd.key \
-    -out /etc/ssl/certs/proftpd.crt -nodes -days 365
-    sudo chmod 0600 /etc/ssl/private/proftpd.key
-    sudo chmod 0640 /etc/ssl/certs/proftpd.crt
+    [user@server]$ sudo openssl req -x509 -newkey rsa:1024 -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.crt -nodes -days 365
+    [user@server]$ sudo chmod 0600 /etc/ssl/private/proftpd.key
+    [user@server]$ sudo chmod 0640 /etc/ssl/certs/proftpd.crt
 
 Similar to the Let's Encrypt certificate setup, edit the /etc/proftpd/tls.conf
 file by uncommenting and modifying the options to look like so:
 
-.. code:: bash
+.. code-block:: apache
 
     TLSRSACertificateFile                   /etc/ssl/certs/proftpd.crt
     TLSRSACertificateKeyFile                /etc/ssl/private/proftpd.key
@@ -227,7 +226,7 @@ file by uncommenting and modifying the options to look like so:
 In addition to the above, uncomment any other lines needed for the setup
 desired.  The minimal settings needed are generally:
 
-.. code:: bash
+.. code-block:: apache
 
     TLSEngine                     on
     TLSLog                        /var/log/proftpd/tls.log
@@ -236,9 +235,9 @@ desired.  The minimal settings needed are generally:
 
 Save the file, and restart ProFTPD to apply this change.
 
-.. code:: bash
+.. code-block:: console
 
-    service proftpd restart
+    [user@server]# service proftpd restart
 
 Debugging
 ~~~~~~~~~
@@ -251,7 +250,7 @@ some issues that can pop up.  In most cases, checking the output of
 error: no valid servers configured
 ----------------------------------
 
-.. code:: bash
+.. code-block:: console
 
     HOST proftpd[5799]: warning: unable to determine IP address of 'HOST'
     HOST proftpd[5799]: error: no valid servers configured
@@ -264,4 +263,4 @@ hostname.  For example, "208.113.131.80      myftpserver".  This allows ProFTPD
 to start.
 
 .. meta::
-    :labels: proftpd debian ubuntu
+    :labels: proftpd debian ubuntu ftp
