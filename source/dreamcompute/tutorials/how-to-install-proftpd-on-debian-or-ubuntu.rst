@@ -26,8 +26,8 @@ Package installation
 
 .. code-block:: console
 
-    [user@server]# sudo apt-get update
-    [user@server]# sudo apt-get install proftpd
+    [user@server]$ sudo apt-get update
+    [user@server]$ sudo apt-get install proftpd
 
 During installation, some additional needed packages are included which require
 a confirmation.  Also, near the end of the installation a prompt is displayed
@@ -138,7 +138,7 @@ Save the file, and restart ProFTPD to apply this change.
 
 .. code-block:: console
 
-    [user@server]# service proftpd restart
+    [user@server]$ sudo service proftpd restart
 
 Anonymous FTP
 -------------
@@ -237,7 +237,7 @@ Save the file, and restart ProFTPD to apply this change.
 
 .. code-block:: console
 
-    [user@server]# service proftpd restart
+    [user@server]$ sudo service proftpd restart
 
 Debugging
 ~~~~~~~~~
