@@ -35,7 +35,7 @@ size, and then prompts you if it should be deleted.
 Clean-up script code
 --------------------
 
-.. code:: python
+.. code-block:: python
 
     #!/usr/bin/python
 
@@ -72,7 +72,7 @@ Clean-up script code
 Clean-up script example output
 ------------------------------
 
-.. code:: bash
+.. code::
 
     Access Key:  ACCESS KEY
     Secret Key:  SECRET KEY

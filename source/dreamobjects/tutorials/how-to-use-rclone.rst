@@ -28,9 +28,9 @@ After you `download <http://rclone.org/downloads/>`_ and install
 rclone on your operating system, proceed to configure it for
 DreamObjects using the interactive configuration tool:
 
-.. code:: bash
+.. code-block:: console
 
-    $ rclone config
+    [user@localhost]$ $ rclone config
     No remotes found - make a new one
     n) New remote
     s) Set configuration password
@@ -270,7 +270,7 @@ With the remote set, you can list the buckets in it with the command:
 
 .. code:: bash
 
-    $ rclone lsd remote:
+    [user@localhost]$ rclone lsd remote:
               -1 2016-03-04 02:19:25        -1 samplebucket
               -1 2016-05-16 22:06:53        -1 anotherbucket
               -1 2015-10-15 21:33:25        -1 greatbucket
@@ -283,22 +283,22 @@ With the remote set, you can list the buckets in it with the command:
 
 Make a new bucket:
 
-.. code:: bash
+.. code-block:: console
 
-    $ rclone mkdir dho:bucket
+    [user@localhost]$ rclone mkdir dho:bucket
 
 List the contents of a bucket:
 
-.. code:: bash
+.. code-block:: console
 
-    rclone ls dho:bucket
+    [user@localhost]$ rclone ls dho:bucket
 
 Sync /home/local/directory to the remote bucket, deleting any excess
 files in the bucket:
 
-.. code:: bash
+.. code-block:: console
 
-    rclone sync /home/local/directory remote:bucket
+    [user@localhost]$ rclone sync /home/local/directory remote:bucket
 
 Check `rclone's official documentation <http://rclone.org/docs/>`_ for
 more examples on how to use the software.

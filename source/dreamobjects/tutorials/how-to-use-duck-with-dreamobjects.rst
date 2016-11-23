@@ -61,47 +61,47 @@ Please refer to duck's CLI `usage
 
 Alternatively, type the following when using duck for usage information:
 
-.. code::
+.. code-block:: console
 
-    duck --help
+    [user@localhost]$ duck --help
 
 Helpful commands
 ----------------
 
     **provides the switches and syntax to perform duck commands**
 
-    .. code::
+    .. code-block:: console
 
-        duck --help
+        [user@localhost]$ duck --help
 
     **lists objects in your bucket**
 
-    .. code::
+    .. code-block:: console
 
-        duck --list dreamhost://mybucketname/ -i (your access key) -p \
+        [user@localhost]$ duck --list dreamhost://mybucketname/ -i (your access key) -p \
         (your secret key)
 
     **lists objects in a bucket folder**
 
-    .. code::
+    .. code-block:: console
 
-        duck --list dreamhost://mybucketname/mysubfolder -i (your access key) \
+        [user@localhost]$ duck --list dreamhost://mybucketname/mysubfolder -i (your access key) \
         -p (your secret key)
 
     **uploads file to the bucket, mybucket/**
 
-    .. code::
+    .. code-block:: console
 
-        duck --username myuser --upload dreamhost://mybucket/ \
+        [user@localhost]$ duck --username myuser --upload dreamhost://mybucket/ \
         my.file.to.upload
 
     *When prompted, enter your Access key then your Secret key.*
 
     **opens a file to edit**
 
-    .. code::
+    .. code-block:: console
 
-        duck --edit dreamhost://mybucketname/yourfile -i (your access key) \
+        [user@localhost]$ duck --edit dreamhost://mybucketname/yourfile -i (your access key) \
         -p (your secret key)
 
     *Be sure to set the permission to the bucket or file to public or you will
