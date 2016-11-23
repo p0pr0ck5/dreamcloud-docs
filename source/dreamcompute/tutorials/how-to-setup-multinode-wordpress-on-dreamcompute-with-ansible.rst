@@ -2,13 +2,6 @@
 How to deploy multinode WordPress on DreamCompute using Ansible
 ===============================================================
 
-.. Note::
-
-    This is a temporary article for deploying a multinode WordPress site using
-    Ansible. A more complete article with more instructions on how to configure
-    the Ansible playbook to your needs is coming later, this article is purely
-    for demo purposes.
-
 Why Ansible?
 ~~~~~~~~~~~~
 
@@ -30,7 +23,7 @@ Download the Ansible playbook by cloning the OpenStack Ops (osops) repository:
 
 .. code-block:: console
 
-    [user@localhost] git clone https://github.com/openstack/osops-tools-contrib.git
+    [user@localhost] git clone https://github.com/squidboylan/osops-tools-contrib.git
 
 Configuring the playbook
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -78,8 +71,8 @@ In order to run the playbook, run the following command:
     (venv)[user@localhost] ansible-playbook -e \
         "env=dreamhost action=apply password=yourpassword" site.yml
 
-This will create your wordpress site, after it runs, visit the IP address of
-your balancer, and if everything worked you should see a wordpress site. The
+This will create your WordPress site, after it runs, visit the IP address of
+your balancer, and if everything worked you should see a WordPress site. The
 full run of the playbook may take 8 - 12 minutes.
 
 In order to delete the site, run the following:
@@ -93,7 +86,7 @@ Extra configuration
 ~~~~~~~~~~~~~~~~~~~
 
 There are several configuration changes that can be made to the playbook to
-modify the wordpress site it creates. Take a look at the "vars/dreamhost.yml"
+modify the WordPress site it creates. Take a look at the "vars/dreamhost.yml"
 file:
 
 * ``stack_size`` is the variable that defines how many servers to use for your
@@ -102,7 +95,16 @@ file:
   to whatver server flavor you want.
 * ``volume_size`` is the size of the volume to put your MySQL database on. A
   bigger site with more data will need a bigger volume.
-* ``wp_theme`` is the wordpress theme to use with the site.
+* ``wp_theme`` is the WordPress theme to use with the site.
+* ``wp_title`` is the title of the WordPress site
+
+The "group_vars/all.yml" file also has some configuration:
+
+* ``db_user`` is the database user that wordpress will use
+* ``db_pass`` is the password for the database user that wordpress will use, it
+  also gets used as the admin password for the website. The default setting
+  will generate a random password using ascii characters that is 8 letters long
+  and store it in /tmp/sqlpassword
 
 .. meta::
     :labels: ansible wordpress apache mysql
