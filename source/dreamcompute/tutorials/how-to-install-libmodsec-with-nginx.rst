@@ -39,8 +39,8 @@ available from the ModSecurity GitHub project, on the `libmodsecurity` branch:
 .. code-block:: console
 
     [root@server]# cd ModSecurity/
-    [root@server]# git checkout -b origin/libmodsecurity
-    Switched to a new branch 'origin/libmodsecurity'
+    [root@server]# git checkout -b origin/v3/master
+    Switched to a new branch 'origin/v3/master'
 
 Initialize and update the git submodules that libmodsecurity requires:
 
